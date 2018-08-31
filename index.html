@@ -390,11 +390,59 @@ int main() {
     // Output results.
     for (i = 1; i &lt;= n; i++)
         printf(&quot;%d &quot;, dis[i]);
-    getchar();
-    getchar();
     return 0;
 }
-</code></pre><h4 id="2-Minimum-Spanning-Trees"><a href="#2-Minimum-Spanning-Trees" class="headerlink" title="2. Minimum Spanning Trees"></a>2. Minimum Spanning Trees</h4><p><strong><em>1) Prime</em></strong><br><strong><em>2) Kruskal</em></strong></p>
+</code></pre><h4 id="2-Minimum-Spanning-Trees"><a href="#2-Minimum-Spanning-Trees" class="headerlink" title="2. Minimum Spanning Trees"></a>2. Minimum Spanning Trees</h4><p><strong><em>1) Prime</em></strong><br>Prime solves the Minimum Spanning Tree problem of weight connected graph. The step is:<br>1] Initialize G = &lt;V, E&gt;, and set U contains vertices of SMT. So (V-U) includes other vertices. And set T stores edges of MST.  First add a random vertex u to U.<br>2] Choose a vertex u of U and sort the distances between v and other alters. Choose the shortest one (u, v). Add v to U and and add (u, v) to T.<br>3] Repeat 2] until U=V.</p>
+<pre><code>#include &lt;stdio.h&gt;
+int main() {
+    int e[10][10]; // Adjacency Matrix.
+    int prime[10], weights[10] // Prime result, weight of any other vertices.
+    int k, i, j, n, m, t1, t2, t3, min, index=0;
+    int inf = 99999999; // Infinity.
+    // Input n, m, represnt number of vertices and number of edges respectively.
+    scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
+
+    // Initialization.
+    for (i = 1; i &lt;= n; i++)
+        for (j = 1; j &lt;= n; j++)
+            if (i == j) e[i][j] = 0;
+              else e[i][j] = inf;
+
+    // Input weight of edges.
+    for (i = 1; i &lt;= m; i++) {
+        scanf(&quot;%d %d %d&quot;, &amp;t1, &amp;t2, &amp;t3);
+        e[t1][t2] = t3;
+    }
+
+    // Prime.
+    for (i = 1, i &lt;= n; i++) {
+        j = 1, k = 1;
+        min = inf;
+        while (j &lt;= n) {
+            if (weights[j] != 0 &amp;&amp; weights[j] &lt; min) {
+                min = weights[j];
+                k = j;
+            }
+            j++;
+        }
+        // Add kth vertex into MST set.
+        prime[index++] = weights[k];
+        weights[k] = 0;
+        // Update weights.
+        for (j = 1; j &lt;= n; j++) {
+            if (weights[j] != 0 &amp;&amp; e[k][j] &lt; weights[j])
+                weights[j] = e[k][j];
+        } 
+    }
+
+    // Output results.
+    for (i = 0; i &lt; n; i++) {
+        totalWeight += primes[i];
+    }
+    printf(&quot;totalWeight = %d&quot;, totalWeight);
+    return 0;
+}
+</code></pre><p><strong><em>2) Kruskal</em></strong></p>
 <h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><ul>
 <li><a href="https://zhuanlan.zhihu.com/p/25498681" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/25498681</a></li>
 <li><a href="http://www.cnblogs.com/skywang12345/p/3603935.html" target="_blank" rel="noopener">http://www.cnblogs.com/skywang12345/p/3603935.html</a></li>
