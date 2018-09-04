@@ -464,7 +464,8 @@ void kruskal(Graph G) {
     int i,m,n,p1,p2;
     int length;
     int index = 0;          // index of rets
-    int vends[MAX]={0};     // stores the ends of each vertex of MST        EData rets[MAX];        // result array, stores edges
+    int vends[MAX]={0};     // stores the ends of each vertex of MST
+    EData rets[MAX];        // result array, stores edges
     EData *edges;           // all edges
 
     // Get all the edges of graph.
@@ -475,10 +476,12 @@ void kruskal(Graph G) {
     for (i = 0; i &lt; G.edgnum; i++) {
         p1 = get_position(G, edges[i].start);   // Get the number of start node of ith edge
         p2 = get_position(G, edges[i].end);     // Get the number of end node of ith edge
-
-        m = get_end(vends, p1);                 // get end of p1            n = get_end(vends, p2);                 // get end of p2            // if m != n，means there is no cycle.
+        m = get_end(vends, p1);                 // get end of p1
+        n = get_end(vends, p2);                 // get end of p2
+        // if m != n，means there is no cycle.
         if (m != n) {
-            vends[m] = n;                       // set [end of m] = n                rets[index++] = edges[i];           // store result
+            vends[m] = n;                       // set [end of m] = n
+            rets[index++] = edges[i];           // store result
         }
     }
     free(edges);
