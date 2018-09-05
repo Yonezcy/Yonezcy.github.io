@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Yonezcy">
 <meta property="og:description" content="Basic ConceptGraph consists of vertices and edges. Representation1. Adjacency Matrix2. Adjacency Linklist3. ComparisonTraversal1. Depth First Search2. Breadth First SearchAlgorithm1. Shortest Path Alg">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-04T02:32:23.000Z">
+<meta property="og:updated_time" content="2018-09-05T02:30:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Graph Theory">
 <meta name="twitter:description" content="Basic ConceptGraph consists of vertices and edges. Representation1. Adjacency Matrix2. Adjacency Linklist3. ComparisonTraversal1. Depth First Search2. Breadth First SearchAlgorithm1. Shortest Path Alg">
@@ -300,7 +300,8 @@
 
       
         <h3 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h3><p>Graph consists of vertices and edges.</p>
-<h3 id="Representation"><a href="#Representation" class="headerlink" title="Representation"></a>Representation</h3><h4 id="1-Adjacency-Matrix"><a href="#1-Adjacency-Matrix" class="headerlink" title="1. Adjacency Matrix"></a>1. Adjacency Matrix</h4><h4 id="2-Adjacency-Linklist"><a href="#2-Adjacency-Linklist" class="headerlink" title="2. Adjacency Linklist"></a>2. Adjacency Linklist</h4><h4 id="3-Comparison"><a href="#3-Comparison" class="headerlink" title="3. Comparison"></a>3. Comparison</h4><h3 id="Traversal"><a href="#Traversal" class="headerlink" title="Traversal"></a>Traversal</h3><h4 id="1-Depth-First-Search"><a href="#1-Depth-First-Search" class="headerlink" title="1. Depth First Search"></a>1. Depth First Search</h4><h4 id="2-Breadth-First-Search"><a href="#2-Breadth-First-Search" class="headerlink" title="2. Breadth First Search"></a>2. Breadth First Search</h4><h3 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h3><h4 id="1-Shortest-Path-Algorithm"><a href="#1-Shortest-Path-Algorithm" class="headerlink" title="1. Shortest Path Algorithm"></a>1. Shortest Path Algorithm</h4><p><strong><em>1) Floyd</em></strong><br>Floyd algorithm is used to calculate the shortest distance between two auxiliary vertices. The step is:<br>1] Initialize adjacency matrix and distances.<br>2] For vertex i, check whether exists vertex k to set up Dis(i,k) + Dis(k,j) &lt; Dis(i,j). If so,  update Dis(i,j) = Dis(i,k) + Dis(k,j).<br>3] Repeat 2] until all vertices have been went through.</p>
+<h3 id="Representation"><a href="#Representation" class="headerlink" title="Representation"></a>Representation</h3><h4 id="1-Adjacency-Matrix"><a href="#1-Adjacency-Matrix" class="headerlink" title="1. Adjacency Matrix"></a>1. Adjacency Matrix</h4><h4 id="2-Adjacency-Linklist"><a href="#2-Adjacency-Linklist" class="headerlink" title="2. Adjacency Linklist"></a>2. Adjacency Linklist</h4><h4 id="3-Comparison"><a href="#3-Comparison" class="headerlink" title="3. Comparison"></a>3. Comparison</h4><h3 id="Traversal"><a href="#Traversal" class="headerlink" title="Traversal"></a>Traversal</h3><h4 id="1-Depth-First-Search"><a href="#1-Depth-First-Search" class="headerlink" title="1. Depth First Search"></a>1. Depth First Search</h4><h4 id="2-Breadth-First-Search"><a href="#2-Breadth-First-Search" class="headerlink" title="2. Breadth First Search"></a>2. Breadth First Search</h4><h3 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h3><h4 id="1-Shortest-Path-Algorithm"><a href="#1-Shortest-Path-Algorithm" class="headerlink" title="1. Shortest Path Algorithm"></a>1. Shortest Path Algorithm</h4><p><strong><em>1) Floyd</em></strong></p>
+<p>Floyd algorithm is used to calculate the shortest distance between two auxiliary vertices. The step is:<br>1] Initialize adjacency matrix and distances.<br>2] For vertex i, check whether exists vertex k to set up Dis(i,k) + Dis(k,j) &lt; Dis(i,j). If so, update Dis(i,j) = Dis(i,k) + Dis(k,j).<br>3] Repeat 2] until all vertices have been went through.</p>
 <pre><code>#include &lt;stdio.h&gt;
 int main() {
     int e[10][10]; // Adjacency Matrix.
@@ -337,7 +338,8 @@ int main() {
     }
     return 0;
 }
-</code></pre><p><strong><em>2) Dijkstra</em></strong><br>Dijkstra algorithm is used to calculate the shortest single source path.<br>The step is:<br>1] Initialize adjacency matrix and shortest distance array(between first vertex and others).<br>2] Initialize two sets U and V, represent shortest path vertex collection/remain vertex. First, add the first vertex to U. Others have been put to V.<br>3] Compare the distance between the first vertex and vertices of set V to find the shortest one. Then add corresponding vertex to U.<br>4] If dis[v] &gt; dis[u] + e[u][v], update the distance array.<br>5] repeat 3] 4] until all vertices are added to U namely none nodes in V.</p>
+</code></pre><p><strong><em>2) Dijkstra</em></strong></p>
+<p>Dijkstra algorithm is used to calculate the shortest single source path.<br>The step is:<br>1] Initialize adjacency matrix and shortest distance array(between first vertex and others).<br>2] Initialize two sets U and V, represent shortest path vertex collection/remain vertex. First, add the first vertex to U. Others have been put to V.<br>3] Compare the distance between the first vertex and vertices belong to set V to find the shortest one. Then add corresponding vertex to U.<br>4] If dis[v] &gt; dis[u] + e[u][v], update dis[v] = dis[u] + e[u][v].<br>5] Repeat 3] 4] until all vertices are added to U namely none nodes in V.</p>
 <pre><code>#include &lt;stdio.h&gt;
 int main() {
     int e[10][10], dis[10], book[10] // Adjacency matrix，shortest distance, mark array.
@@ -391,7 +393,8 @@ int main() {
         printf(&quot;%d &quot;, dis[i]);
     return 0;
 }
-</code></pre><h4 id="2-Minimum-Spanning-Trees"><a href="#2-Minimum-Spanning-Trees" class="headerlink" title="2. Minimum Spanning Trees"></a>2. Minimum Spanning Trees</h4><p><strong><em>1) Prime</em></strong><br>Prime solves the Minimum Spanning Tree problem of weight connected graph. The step is:<br>1] Initialize G = &lt;V, E&gt;, and set U contains vertices of SMT. So (V-U) includes other vertices. And set T stores edges of MST.  First add a random vertex u to U.<br>2] Choose a vertex u of U and sort the distances between v and other alters. Choose the shortest one (u, v). Add v to U and and add (u, v) to T.<br>3] Repeat 2] until U=V.</p>
+</code></pre><h4 id="2-Minimum-Spanning-Trees"><a href="#2-Minimum-Spanning-Trees" class="headerlink" title="2. Minimum Spanning Trees"></a>2. Minimum Spanning Trees</h4><p><strong><em>1) Prime</em></strong></p>
+<p>Prime solves the Minimum Spanning Tree problem of weight connected graph. The step is:<br>1] Initialize G = &lt;V, E&gt;, and set U contains vertices of SMT. So (V-U) includes other vertices. And set T stores edges of MST. First add a random vertex u to U.<br>2] Choose a vertex u of U and sort the distances between u and other alters. Choose the shortest one (u, v). Add v to U and add (u, v) to T.<br>3] Repeat 2] until U = V.</p>
 <pre><code>#include &lt;stdio.h&gt;
 int main() {
     int e[10][10]; // Adjacency Matrix.
@@ -441,7 +444,8 @@ int main() {
     printf(&quot;totalWeight = %d&quot;, totalWeight);
     return 0;
 }
-</code></pre><p><strong><em>2) Kruskal</em></strong><br>Do the same thing as Prime.<br>1] Initialize G = &lt;V, E&gt;.<br>2] Sort all the weights in descending order.<br>3] Go through the weights set, find the shortest one and check if its vertices belongs to different trees.<br>4] Repeat 3].</p>
+</code></pre><p><strong><em>2) Kruskal</em></strong></p>
+<p>Do the same thing as Prime.<br>1] Initialize G = &lt;V, E&gt;. Set U contains vertices of SMT. So (V-U) includes other vertices. And set T stores edges of MST.<br>2] Sort weights in ascending order.<br>3] Go through the weights set, and find the shortest one.<br>4] Check if its vertices belong to different trees. If so, add its vertices to U, and add edge to T.<br>5] Alternatively, find the next shortest edge. Repeat 4].<br>6] Repeat 3]4]5] until U = V.</p>
 <pre><code>#include &lt;stdio.h&gt;
 
 // 邻接矩阵
