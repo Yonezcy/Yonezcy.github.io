@@ -445,7 +445,7 @@ int main() {
 </code></pre><p><strong><em>2) Kruskal</em></strong><br>Do the same thing as Prime.<br>1] Initialize G = &lt;V, E&gt;. Set U contains vertices of MST. So (V-U) includes other vertices. And set T stores edges of MST.<br>2] Sort weights in ascending order.<br>3] Go through the weights set, and find the shortest one.<br>4] Check if its vertices belong to different trees. If so, add its vertices to U, and add edge to T.<br>5] Alternatively, find the next shortest edge. Repeat 4].<br>6] Repeat 3,4,5 until U = V.</p>
 <pre><code>#include &lt;stdio.h&gt;
 
-// 邻接矩阵
+// Adjacency matrix.
 typedef struct _graph {
     char vexs[MAX];       // vertex
     int vexnum;           // number of vertices
@@ -453,7 +453,7 @@ typedef struct _graph {
     int matrix[MAX][MAX]; // adjacency matrix
 }Graph, *PGraph;
 
-// 边的结构体
+// Edge struct.
 typedef struct _EdgeData {
     char start; // start of edge
     char end;   // end of edge
