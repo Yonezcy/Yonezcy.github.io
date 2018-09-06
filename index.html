@@ -302,207 +302,16 @@
       
         
           
-            <h3 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h3><p>Graph consists of vertices and edges.</p>
-<h3 id="Representation"><a href="#Representation" class="headerlink" title="Representation"></a>Representation</h3><h4 id="1-Adjacency-Matrix"><a href="#1-Adjacency-Matrix" class="headerlink" title="1. Adjacency Matrix"></a>1. Adjacency Matrix</h4><h4 id="2-Adjacency-Linklist"><a href="#2-Adjacency-Linklist" class="headerlink" title="2. Adjacency Linklist"></a>2. Adjacency Linklist</h4><h4 id="3-Comparison"><a href="#3-Comparison" class="headerlink" title="3. Comparison"></a>3. Comparison</h4><h3 id="Traversal"><a href="#Traversal" class="headerlink" title="Traversal"></a>Traversal</h3><h4 id="1-Depth-First-Search"><a href="#1-Depth-First-Search" class="headerlink" title="1. Depth First Search"></a>1. Depth First Search</h4><h4 id="2-Breadth-First-Search"><a href="#2-Breadth-First-Search" class="headerlink" title="2. Breadth First Search"></a>2. Breadth First Search</h4><h3 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h3><h4 id="1-Shortest-Path-Algorithm"><a href="#1-Shortest-Path-Algorithm" class="headerlink" title="1. Shortest Path Algorithm"></a>1. Shortest Path Algorithm</h4><p><strong><em>1) Floyd</em></strong><br>Floyd algorithm is used to calculate the shortest distance between two auxiliary vertices. The step is:<br>1] Initialize adjacency matrix and distances.<br>2] For vertex i, check whether exists vertex k to set up Dis(i,k) + Dis(k,j) &lt; Dis(i,j). If so, update Dis(i,j) = Dis(i,k) + Dis(k,j).<br>3] Repeat 2] until all vertices have been went through.</p>
-<pre><code>#include &lt;stdio.h&gt;
-int main() {
-    int e[10][10]; // Adjacency Matrix.
-    int k, i, j, n, m, t1, t2, t3;
-    int inf = 99999999; // Infinity.
-    // Input n, m, represnt number of vertices and number of edges respectively.
-    scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
-
-    // Initialization.
-    for (i = 1; i &lt;= n; i++)
-        for (j = 1; j &lt;= n; j++)
-            if (i == j) e[i][j] = 0;
-              else e[i][j] = inf;
-
-    // Input weight of edges.
-    for (i = 1; i &lt;= m; i++) {
-        scanf(&quot;%d %d %d&quot;, &amp;t1, &amp;t2, &amp;t3);
-        e[t1][t2] = t3;
-    }
-
-    // Floyd.
-    for (k = 1; k &lt;= n; k++)
-        for (i = 1; i &lt;= n; i++)
-            for (j = 1; j &lt;= n; j++)
-                if (e[i][j] &gt; e[i][k] + e[k][j])
-                    e[i][j] = e[i][k] + e[k][j];
-
-    // Output results.
-    for (i = 1; i &lt;= n; i++) {
-         for (j = 1; j &lt;= n; j++) {
-            printf(&quot;%10d&quot;, e[i][j]);
-        }
-        printf(&quot;\n&quot;);
-    }
-    return 0;
-}
-</code></pre><p><strong><em>2) Dijkstra</em></strong><br>Dijkstra algorithm is used to calculate the shortest single source path.<br>The step is:<br>1] Initialize adjacency matrix and shortest distance array(between first vertex and others).<br>2] Initialize two sets U and V, represent shortest path vertex collection/remain vertex. First, add the first vertex to U. Others have been put to V.<br>3] Compare the distance between the first vertex and vertices belong to set V to find the shortest one. Then add corresponding vertex to U.<br>4] If dis[v] &gt; dis[u] + e[u][v], update dis[v] = dis[u] + e[u][v].<br>5] Repeat 3] 4] until all vertices are added to U namely none nodes in V.</p>
-<pre><code>#include &lt;stdio.h&gt;
-int main() {
-    int e[10][10], dis[10], book[10] // Adjacency matrix，shortest distance, mark array.
-    int i, j, n, m, t1, t2, t3, u, v, min;
-    int inf = 99999999999; // Infinity.
-    // Input n and m as number of vertices and edges respectively.
-    scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
-
-    // Initialize adjacency matrix.
-    for (i = 1; i &lt;= n; i++)
-        for (j = 1; j &lt;= n; j++)
-            if (i == j) e[i][j] = 0;
-              else e[i][j] = inf;
-
-    // Input weights of edges.
-    for (i = 1; i &lt;= m; i++) {
-        scanf(&quot;%d %d %d&quot;, &amp;t1, &amp;t2, &amp;t3);
-        e[t1][t2] = t3;
-    }
-
-    // Initialize shortest distance array.
-    for (i = 1; i &lt;= n; i++)
-        dis[i] = e[1][i];
-
-    // Initialize mark array.
-    for (i = 1 ; i &lt;= n; i++)
-        book[i] = 0;
-    book[1] = 1;
-
-    // Dijkstra.
-    for (i = 1; i &lt;= n-1; i++) {
-        min = inf;
-        // Find the distances between the first vertex and others.
-        for (j = 1; j &lt;= n; j++) {
-            if (book[j] == 0 &amp;&amp; dis[j] &lt; min) {
-                min = dis[j];
-                u = j;
-            }
-        }
-        book[u] = 1;
-        // Update distances.
-        for (v = 1; v &lt;= n; v++) {
-            if (e[u][v] &lt; inf) {
-                if (dis[v] &gt; dis[u] + e[u][v])
-                    dis[v] = dis[u] + e[u][v];
-            }
-        }
-    }
-    // Output results.
-    for (i = 1; i &lt;= n; i++)
-        printf(&quot;%d &quot;, dis[i]);
-    return 0;
-}
-</code></pre><h4 id="2-Minimum-Spanning-Trees"><a href="#2-Minimum-Spanning-Trees" class="headerlink" title="2. Minimum Spanning Trees"></a>2. Minimum Spanning Trees</h4><p><strong><em>1) Prime</em></strong><br>Prime solves the Minimum Spanning Tree problem of weight connected graph. The step is:<br>1] Initialize G = &lt;V, E&gt;, and set U contains vertices of MST. So (V-U) includes other vertices. And set T stores edges of MST. First add a random vertex u to U.<br>2] Choose a vertex u of U and sort the distances between u and other alters. Choose the shortest one (u, v). Add v to U and add (u, v) to T.<br>3] Repeat 2] until U = V.</p>
-<pre><code>#include &lt;stdio.h&gt;
-int main() {
-    int e[10][10]; // Adjacency Matrix.
-    int prime[10], weights[10] // Prime result, weight of any other vertices.
-    int k, i, j, n, m, t1, t2, t3, min, index=0;
-    int inf = 99999999; // Infinity.
-    // Input n, m, represnt number of vertices and number of edges respectively.
-    scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
-
-    // Initialization.
-    for (i = 1; i &lt;= n; i++)
-        for (j = 1; j &lt;= n; j++)
-            if (i == j) e[i][j] = 0;
-              else e[i][j] = inf;
-
-    // Input weight of edges.
-    for (i = 1; i &lt;= m; i++) {
-        scanf(&quot;%d %d %d&quot;, &amp;t1, &amp;t2, &amp;t3);
-        e[t1][t2] = t3;
-    }
-
-    // Prime.
-    for (i = 1, i &lt;= n; i++) {
-        j = 1, k = 1;
-        min = inf;
-        while (j &lt;= n) {
-            if (weights[j] != 0 &amp;&amp; weights[j] &lt; min) {
-                min = weights[j];
-                k = j;
-            }
-            j++;
-        }
-        // Add kth vertex into MST set.
-        prime[index++] = weights[k];
-        weights[k] = 0;
-        // Update weights.
-        for (j = 1; j &lt;= n; j++) {
-            if (weights[j] != 0 &amp;&amp; e[k][j] &lt; weights[j])
-                weights[j] = e[k][j];
-        } 
-    }
-
-    // Output results.
-    for (i = 0; i &lt; n; i++) {
-        totalWeight += primes[i];
-    }
-    printf(&quot;totalWeight = %d&quot;, totalWeight);
-    return 0;
-}
-</code></pre><p><strong><em>2) Kruskal</em></strong><br>Do the same thing as Prime.<br>1] Initialize G = &lt;V, E&gt;. Set U contains vertices of MST. So (V-U) includes other vertices. And set T stores edges of MST.<br>2] Sort weights in ascending order.<br>3] Go through the weights set, and find the shortest one.<br>4] Check if its vertices belong to different trees. If so, add its vertices to U, and add edge to T.<br>5] Alternatively, find the next shortest edge. Repeat 4].<br>6] Repeat 3,4,5 until U = V.</p>
-<pre><code>#include &lt;stdio.h&gt;
-
-// Adjacency matrix.
-typedef struct _graph {
-    char vexs[MAX];       // vertex
-    int vexnum;           // number of vertices
-    int edgnum;           // edges
-    int matrix[MAX][MAX]; // adjacency matrix
-}Graph, *PGraph;
-
-// Edge struct.
-typedef struct _EdgeData {
-    char start; // start of edge
-    char end;   // end of edge
-    int weight; // weight of edge
-}EData;
-
-void kruskal(Graph G) {
-    int i,m,n,p1,p2;
-    int length;
-    int index = 0;          // index of rets
-    int vends[MAX]={0};     // stores the ends of each vertex of MST
-    EData rets[MAX];        // result array, stores edges
-    EData *edges;           // all edges
-
-    // Get all the edges of graph.
-    edges = get_edges(G);
-    // Sort in descending order of weight.
-    sorted_edges(edges, G.edgnum);
-
-    for (i = 0; i &lt; G.edgnum; i++) {
-        p1 = get_position(G, edges[i].start);   // Get the number of start node of ith edge
-        p2 = get_position(G, edges[i].end);     // Get the number of end node of ith edge
-        m = get_end(vends, p1);                 // get end of p1
-        n = get_end(vends, p2);                 // get end of p2
-        // if m != n，means there is no cycle.
-        if (m != n) {
-            vends[m] = n;                       // set [end of m] = n
-            rets[index++] = edges[i];           // store result
-        }
-    }
-    free(edges);
-
-    // Count and print.
-    length = 0;
-    for (i = 0; i &lt; index; i++)
-        length += rets[i].weight;
-    printf(&quot;Kruskal=%d: &quot;, length);
-    for (i = 0; i &lt; index; i++)
-        printf(&quot;(%c,%c) &quot;, rets[i].start, rets[i].end);
-    printf(&quot;\n&quot;);
-}
-</code></pre><h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><ul>
-<li><a href="https://zhuanlan.zhihu.com/p/25498681" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/25498681</a></li>
-<li><a href="http://www.cnblogs.com/skywang12345/p/3603935.html" target="_blank" rel="noopener">http://www.cnblogs.com/skywang12345/p/3603935.html</a></li>
-</ul>
-
-          
+          Basic ConceptGraph consists of vertices and edges.
+Representation1. Adjacency Matrix2. Adjacency Linklist3. ComparisonTraversal1. Depth First Search2.
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/blog/2018/08/29/Graph-Theory/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -620,9 +429,16 @@ void kruskal(Graph G) {
       
         
           
-            <p>A new challenge is coming. Let’s get it!</p>
+          A new challenge is coming. Let’s get it!
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/blog/2018/08/14/settingsail/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -740,9 +556,16 @@ void kruskal(Graph G) {
       
         
           
-            <p>Welcome to my page.</p>
+          Welcome to my page.
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/blog/2018/08/14/hello-world/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
