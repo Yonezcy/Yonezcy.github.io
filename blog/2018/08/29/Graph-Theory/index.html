@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Yonezcy">
 <meta property="og:description" content="Basic ConceptGraph consists of vertices and edges. Representation1. Adjacency Matrix2. Adjacency Linklist3. ComparisonTraversal1. Depth First Search2. Breadth First SearchAlgorithm1. Shortest Path Alg">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-06T02:48:34.000Z">
+<meta property="og:updated_time" content="2018-09-07T04:12:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Graph Theory">
 <meta name="twitter:description" content="Basic ConceptGraph consists of vertices and edges. Representation1. Adjacency Matrix2. Adjacency Linklist3. ComparisonTraversal1. Depth First Search2. Breadth First SearchAlgorithm1. Shortest Path Alg">
@@ -443,7 +443,7 @@ int main() {
     printf(&quot;totalWeight = %d&quot;, totalWeight);
     return 0;
 }
-</code></pre><p><strong><em>2) Kruskal</em></strong><br>Do the same thing as Prime.<br>1] Initialize G = &lt;V, E&gt;. Set U contains vertices of MST. So (V-U) includes other vertices. And set T stores edges of MST.<br>2] Sort weights in ascending order.<br>3] Go through the weights set, and find the shortest one.<br>4] Check if its vertices belong to different trees. If so, add its vertices to U, and add edge to T.<br>5] Alternatively, find the next shortest edge. Repeat 4].<br>6] Repeat 3,4,5 until U = V.</p>
+</code></pre><p><strong><em>2) Kruskal</em></strong><br>Do the same thing as Prime.<br>1] Sort all the edges in non-decreasing order of their weight.<br>2] Pick the smallest edge. Check if it forms a cycle with the spanning tree formed so far. If cycle is not formed, include this edge. Else, discard it.<br>3] Repeat step#2 until there are (V-1) edges in the spanning tree.</p>
 <pre><code>#include &lt;stdio.h&gt;
 
 // Adjacency matrix.
@@ -499,6 +499,7 @@ void kruskal(Graph G) {
 </code></pre><h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><ul>
 <li><a href="https://zhuanlan.zhihu.com/p/25498681" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/25498681</a></li>
 <li><a href="http://www.cnblogs.com/skywang12345/p/3603935.html" target="_blank" rel="noopener">http://www.cnblogs.com/skywang12345/p/3603935.html</a></li>
+<li><a href="https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/" target="_blank" rel="noopener">https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/</a></li>
 </ul>
 
       
