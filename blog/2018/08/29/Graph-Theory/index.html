@@ -91,7 +91,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/Undirected_Graph.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/Adjacency_matrix.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/Ajacency_list.png">
-<meta property="og:updated_time" content="2018-09-10T02:02:19.000Z">
+<meta property="og:updated_time" content="2018-09-11T07:11:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Graph Theory">
 <meta name="twitter:description" content="Basic ConceptGraph consists of vertices and edges. Representation1. Adjacency Matrix  2. Adjacency List 3. ComparisonThe adjacency matrix saves search time and the adjacency list saves space. Traversa">
@@ -312,7 +312,17 @@
 <p><img src="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/Adjacency_matrix.png" alt="Adjacency Matrix"></p>
 <h4 id="2-Adjacency-List"><a href="#2-Adjacency-List" class="headerlink" title="2. Adjacency List"></a>2. Adjacency List</h4><p><img src="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/Ajacency_list.png" alt="Adjacency List"></p>
 <h4 id="3-Comparison"><a href="#3-Comparison" class="headerlink" title="3. Comparison"></a>3. Comparison</h4><p>The adjacency matrix saves search time and the adjacency list saves space.</p>
-<h3 id="Traversal"><a href="#Traversal" class="headerlink" title="Traversal"></a>Traversal</h3><h4 id="1-Depth-First-Search"><a href="#1-Depth-First-Search" class="headerlink" title="1. Depth First Search"></a>1. Depth First Search</h4><h4 id="2-Breadth-First-Search"><a href="#2-Breadth-First-Search" class="headerlink" title="2. Breadth First Search"></a>2. Breadth First Search</h4><h3 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h3><h4 id="1-Shortest-Path-Algorithm"><a href="#1-Shortest-Path-Algorithm" class="headerlink" title="1. Shortest Path Algorithm"></a>1. Shortest Path Algorithm</h4><p><strong><em>1) Floyd</em></strong><br>Floyd algorithm is used to calculate the shortest distance between two auxiliary vertices. The step is:<br>1] Initialize adjacency matrix and distances.<br>2] For vertex i, check whether exists vertex k to set up Dis(i,k) + Dis(k,j) &lt; Dis(i,j). If so, update Dis(i,j) = Dis(i,k) + Dis(k,j).<br>3] Repeat 2] until all vertices have been went through.</p>
+<h3 id="Traversal"><a href="#Traversal" class="headerlink" title="Traversal"></a>Traversal</h3><h4 id="1-Depth-First-Search"><a href="#1-Depth-First-Search" class="headerlink" title="1. Depth First Search"></a>1. Depth First Search</h4><p>1] Visit vertex v.<br>2] Choose an adjacency vertex to DFS.<br>3] Repeart step #1,2 until all vectices are visited.</p>
+<pre><code>public void DFS(Vertex v) {
+    visited[v] = true;
+    for (W in adjacency nodes of v) {
+         if (!visited[W]) {
+            DFS(W);
+         }
+    }
+}
+</code></pre><h4 id="2-Breadth-First-Search"><a href="#2-Breadth-First-Search" class="headerlink" title="2. Breadth First Search"></a>2. Breadth First Search</h4><p>1] Vist vertex v.<br>2] Find all adjacency vertices in set V_new, and store them in a queue Q.<br>3] Visit v_news in V_new.<br>4] For v_new in Q, repeat step #2,3 until all queues are null.</p>
+<h3 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h3><h4 id="1-Shortest-Path-Algorithm"><a href="#1-Shortest-Path-Algorithm" class="headerlink" title="1. Shortest Path Algorithm"></a>1. Shortest Path Algorithm</h4><p><strong><em>1) Floyd</em></strong><br>Floyd algorithm is used to calculate the shortest distance between two auxiliary vertices. The step is:<br>1] Initialize adjacency matrix and distances.<br>2] For vertex i, check whether exists vertex k to set up Dis(i,k) + Dis(k,j) &lt; Dis(i,j). If so, update Dis(i,j) = Dis(i,k) + Dis(k,j).<br>3] Repeat 2] until all vertices have been went through.</p>
 <pre><code>#include &lt;stdio.h&gt;
 int main() {
     int e[10][10]; // Adjacency Matrix.
