@@ -81,20 +81,20 @@
 
 
 
-<meta name="description" content="Basic ConceptGraph consists of vertices and edges. Representation1. Adjacency Matrix  2. Adjacency List 3. ComparisonThe adjacency matrix saves search time and the adjacency list saves space. Traversa">
+<meta name="description" content="Basic ConceptA Graph is, in its simplest form, a collection of points joined together in pairs by lines. In the jargon of the field the points are referred to as vertices or nodes and the lines are re">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Graph Theory">
 <meta property="og:url" content="http://yonezcy.github.io/blog/2018/08/29/Graph-Theory/index.html">
 <meta property="og:site_name" content="Yonezcy">
-<meta property="og:description" content="Basic ConceptGraph consists of vertices and edges. Representation1. Adjacency Matrix  2. Adjacency List 3. ComparisonThe adjacency matrix saves search time and the adjacency list saves space. Traversa">
+<meta property="og:description" content="Basic ConceptA Graph is, in its simplest form, a collection of points joined together in pairs by lines. In the jargon of the field the points are referred to as vertices or nodes and the lines are re">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/Undirected_Graph.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/Adjacency_matrix.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/Ajacency_list.png">
-<meta property="og:updated_time" content="2018-09-11T07:20:49.000Z">
+<meta property="og:updated_time" content="2018-09-12T03:27:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Graph Theory">
-<meta name="twitter:description" content="Basic ConceptGraph consists of vertices and edges. Representation1. Adjacency Matrix  2. Adjacency List 3. ComparisonThe adjacency matrix saves search time and the adjacency list saves space. Traversa">
+<meta name="twitter:description" content="Basic ConceptA Graph is, in its simplest form, a collection of points joined together in pairs by lines. In the jargon of the field the points are referred to as vertices or nodes and the lines are re">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/Undirected_Graph.png">
 
 
@@ -307,12 +307,12 @@
       
 
       
-        <h3 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h3><p>Graph consists of vertices and edges.</p>
+        <h3 id="Basic-Concept"><a href="#Basic-Concept" class="headerlink" title="Basic Concept"></a>Basic Concept</h3><p>A Graph is, in its simplest form, a collection of points joined together in pairs by lines. In the jargon of the field the points are referred to as vertices or nodes and the lines are referred to as edges.<br>Terms:<br>1) Vertex = Node = Point = Actor<br>2) Edge = Line</p>
 <h3 id="Representation"><a href="#Representation" class="headerlink" title="Representation"></a>Representation</h3><h4 id="1-Adjacency-Matrix"><a href="#1-Adjacency-Matrix" class="headerlink" title="1. Adjacency Matrix"></a>1. Adjacency Matrix</h4><p><img src="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/Undirected_Graph.png" width="50%" height="50%"></p>
 <p><img src="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/Adjacency_matrix.png" width="50%" height="50%"></p>
 <h4 id="2-Adjacency-List"><a href="#2-Adjacency-List" class="headerlink" title="2. Adjacency List"></a>2. Adjacency List</h4><p><img src="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/Ajacency_list.png" width="75%" height="75%"></p>
 <h4 id="3-Comparison"><a href="#3-Comparison" class="headerlink" title="3. Comparison"></a>3. Comparison</h4><p>The adjacency matrix saves search time and the adjacency list saves space.</p>
-<h3 id="Traversal"><a href="#Traversal" class="headerlink" title="Traversal"></a>Traversal</h3><h4 id="1-Depth-First-Search"><a href="#1-Depth-First-Search" class="headerlink" title="1. Depth First Search"></a>1. Depth First Search</h4><p>1] Visit vertex v.<br>2] Choose an adjacency vertex to DFS.<br>3] Repeart step #1,2 until all vectices are visited.</p>
+<h3 id="Traversal-Graph-Search"><a href="#Traversal-Graph-Search" class="headerlink" title="Traversal(Graph Search)"></a>Traversal(Graph Search)</h3><h4 id="1-Depth-First-Search"><a href="#1-Depth-First-Search" class="headerlink" title="1. Depth First Search"></a>1. Depth First Search</h4><p>1] Visit vertex v.<br>2] Choose an adjacency vertex to DFS.<br>3] Repeart step #1,2 until all vectices are visited.</p>
 <pre><code>public void DFS(Vertex v) {
     visited[v] = true;
     for (W in adjacency nodes of v) {
@@ -521,7 +521,7 @@ void kruskal(Graph G) {
         printf(&quot;(%c, %c) &quot;, rets[i].start, rets[i].end);
     printf(&quot;\n&quot;);
 }
-</code></pre><h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><ul>
+</code></pre><h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ul>
 <li><a href="https://zhuanlan.zhihu.com/p/25498681" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/25498681</a></li>
 <li><a href="http://www.cnblogs.com/skywang12345/p/3603935.html" target="_blank" rel="noopener">http://www.cnblogs.com/skywang12345/p/3603935.html</a></li>
 <li><a href="https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/" target="_blank" rel="noopener">https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/</a></li>
@@ -695,7 +695,7 @@ void kruskal(Graph G) {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-Concept"><span class="nav-number">1.</span> <span class="nav-text">Basic Concept</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Representation"><span class="nav-number">2.</span> <span class="nav-text">Representation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Adjacency-Matrix"><span class="nav-number">2.1.</span> <span class="nav-text">1. Adjacency Matrix</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Adjacency-List"><span class="nav-number">2.2.</span> <span class="nav-text">2. Adjacency List</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Comparison"><span class="nav-number">2.3.</span> <span class="nav-text">3. Comparison</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Traversal"><span class="nav-number">3.</span> <span class="nav-text">Traversal</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Depth-First-Search"><span class="nav-number">3.1.</span> <span class="nav-text">1. Depth First Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Breadth-First-Search"><span class="nav-number">3.2.</span> <span class="nav-text">2. Breadth First Search</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Algorithm"><span class="nav-number">4.</span> <span class="nav-text">Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Shortest-Path-Algorithm"><span class="nav-number">4.1.</span> <span class="nav-text">1. Shortest Path Algorithm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Minimum-Spanning-Trees"><span class="nav-number">4.2.</span> <span class="nav-text">2. Minimum Spanning Trees</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reference"><span class="nav-number">4.3.</span> <span class="nav-text">Reference</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-Concept"><span class="nav-number">1.</span> <span class="nav-text">Basic Concept</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Representation"><span class="nav-number">2.</span> <span class="nav-text">Representation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Adjacency-Matrix"><span class="nav-number">2.1.</span> <span class="nav-text">1. Adjacency Matrix</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Adjacency-List"><span class="nav-number">2.2.</span> <span class="nav-text">2. Adjacency List</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Comparison"><span class="nav-number">2.3.</span> <span class="nav-text">3. Comparison</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Traversal-Graph-Search"><span class="nav-number">3.</span> <span class="nav-text">Traversal(Graph Search)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Depth-First-Search"><span class="nav-number">3.1.</span> <span class="nav-text">1. Depth First Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Breadth-First-Search"><span class="nav-number">3.2.</span> <span class="nav-text">2. Breadth First Search</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Algorithm"><span class="nav-number">4.</span> <span class="nav-text">Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Shortest-Path-Algorithm"><span class="nav-number">4.1.</span> <span class="nav-text">1. Shortest Path Algorithm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Minimum-Spanning-Trees"><span class="nav-number">4.2.</span> <span class="nav-text">2. Minimum Spanning Trees</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
