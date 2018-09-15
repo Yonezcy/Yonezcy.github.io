@@ -81,17 +81,17 @@
 
 
 
-<meta name="description" content="This blog reveals some details of vital importance in python coding.  ###Sort() + lambda expressionLambda expression can be used to be the parameter ‘cmp’ of sort() to determine the way of sort. Defau">
+<meta name="description" content="This blog reveals some details of vital importance in python coding.  Sort() + lambda expressionLambda expression can be used to be the parameter ‘cmp’ of sort() to determine the way of sort. Default(">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PYTHON DETAIL">
 <meta property="og:url" content="http://yonezcy.github.io/blog/2018/09/15/PYTHON-DETAIL/index.html">
 <meta property="og:site_name" content="Yonezcy">
-<meta property="og:description" content="This blog reveals some details of vital importance in python coding.  ###Sort() + lambda expressionLambda expression can be used to be the parameter ‘cmp’ of sort() to determine the way of sort. Defau">
+<meta property="og:description" content="This blog reveals some details of vital importance in python coding.  Sort() + lambda expressionLambda expression can be used to be the parameter ‘cmp’ of sort() to determine the way of sort. Default(">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-15T07:42:26.000Z">
+<meta property="og:updated_time" content="2018-09-15T07:47:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PYTHON DETAIL">
-<meta name="twitter:description" content="This blog reveals some details of vital importance in python coding.  ###Sort() + lambda expressionLambda expression can be used to be the parameter ‘cmp’ of sort() to determine the way of sort. Defau">
+<meta name="twitter:description" content="This blog reveals some details of vital importance in python coding.  Sort() + lambda expressionLambda expression can be used to be the parameter ‘cmp’ of sort() to determine the way of sort. Default(">
 
 
 
@@ -304,7 +304,7 @@
 
       
         <p>This blog reveals some details of vital importance in python coding. </p>
-<p>###Sort() + lambda expression<br>Lambda expression can be used to be the parameter ‘cmp’ of sort() to determine the way of sort.</p>
+<h3 id="Sort-lambda-expression"><a href="#Sort-lambda-expression" class="headerlink" title="Sort() + lambda expression"></a>Sort() + lambda expression</h3><p>Lambda expression can be used to be the parameter ‘cmp’ of sort() to determine the way of sort.</p>
 <p>Default(Ascending order): </p>
 <pre><code>list.sort() = list.sort(cmp = lambda x, y: cmp(x, y))
 </code></pre><p>Descending order:</p>
@@ -313,7 +313,7 @@
 <pre><code>a.sort(cmp = lambda x, y: cmp(y+x, x+y))
 &gt;&gt;&gt; a
 [&apos;9&apos;, &apos;7&apos;, &apos;5&apos;, &apos;3&apos;, &apos;1&apos;]
-</code></pre><p>###Zip<br>Zip function is used to merge two single elements into a (key, value) tuple.<br>e.g.</p>
+</code></pre><h3 id="Zip"><a href="#Zip" class="headerlink" title="Zip"></a>Zip</h3><p>Zip function is used to merge two single elements into a (key, value) tuple.<br>e.g.</p>
 <pre><code>list_keys = [&apos;Country&apos;, &apos;Total&apos;]
 list_values = [[&apos;US&apos;, &apos;SU&apos;], [118, 73]]
 &gt;&gt;&gt; zip(list_keys, list_values)
@@ -321,7 +321,7 @@ list_values = [[&apos;US&apos;, &apos;SU&apos;], [118, 73]]
 </code></pre><p>Convert (key, value) pairs to dict:</p>
 <pre><code>&gt;&gt;&gt; dict(list(zip(list_keys, list_values)))
 {&apos;Country&apos;: [&apos;US&apos;, &apos;SU&apos;], &apos;Total&apos;: [118, 73]}
-</code></pre><p>###Generator:<br>Generator will not create complete list in order to save space.<br>e.g. Create a generator:</p>
+</code></pre><h3 id="Generator"><a href="#Generator" class="headerlink" title="Generator:"></a>Generator:</h3><p>Generator will not create complete list in order to save space.<br>e.g. Create a generator:</p>
 <pre><code>&gt;&gt;&gt; g = (x * x for x in range(10))
 &gt;&gt;&gt; g
 &lt;generator object &lt;genexpr&gt; at 0x104feab40&gt;
@@ -538,7 +538,7 @@ list_values = [[&apos;US&apos;, &apos;SU&apos;], [118, 73]]
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Conditional-operator"><span class="nav-number">1.</span> <span class="nav-text">Conditional operator</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sort-lambda-expression"><span class="nav-number">1.</span> <span class="nav-text">Sort() + lambda expression</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zip"><span class="nav-number">2.</span> <span class="nav-text">Zip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generator"><span class="nav-number">3.</span> <span class="nav-text">Generator:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conditional-operator"><span class="nav-number">4.</span> <span class="nav-text">Conditional operator</span></a></li></ol></div>
             
 
           </div>
