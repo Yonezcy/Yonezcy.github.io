@@ -88,10 +88,14 @@
 <meta property="og:site_name" content="Yonezcy">
 <meta property="og:description" content="Introduce some network models and their generating algorithms. ER ModelThe Erdős–Rényi model is either of two closely related models for generating random graphs.  In the model of Erdős and Rényi, all">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-15T08:32:12.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/pictures/ER.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/pictures/WS.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/pictures/BA.png">
+<meta property="og:updated_time" content="2018-09-15T08:42:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Network Generate Model and Algorithm">
 <meta name="twitter:description" content="Introduce some network models and their generating algorithms. ER ModelThe Erdős–Rényi model is either of two closely related models for generating random graphs.  In the model of Erdős and Rényi, all">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/pictures/ER.png">
 
 
 
@@ -306,6 +310,7 @@
         <p>Introduce some network models and their generating algorithms.</p>
 <h3 id="ER-Model"><a href="#ER-Model" class="headerlink" title="ER Model"></a>ER Model</h3><p>The <a href="https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model" target="_blank" rel="noopener">Erdős–Rényi model</a> is either of two closely related models for generating random graphs. </p>
 <p>In the model of Erdős and Rényi, all graphs on a fixed vertex set with a fixed number of edges are equally likely; in the model introduced by Gilbert, each edge has a fixed probability of being present or absent, independently of the other edges. </p>
+<p><img src="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/pictures/ER.png" width="80%" height="80%"></p>
 <p><strong>Algorithm</strong></p>
 <ol>
 <li>Initialize adjacency matrix and probabilty p of linking.</li>
@@ -341,6 +346,7 @@
       graph[v, w] = graph[w, v] = 1
   return graph
 </code></pre><h3 id="WS-Small-World-Model"><a href="#WS-Small-World-Model" class="headerlink" title="WS Small World Model"></a>WS Small World Model</h3><p>The <a href="https://en.wikipedia.org/wiki/Watts%E2%80%93Strogatz_model" target="_blank" rel="noopener">Watts–Strogatz model</a> is a random graph generation model that produces graphs with small-world properties, including short average path lengths and high clustering.</p>
+<p><img src="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/pictures/WS.png" width="80%" height="80%"></p>
 <p>Algorithm:</p>
 <ol>
 <li>Initialize adjacency matrix, number of edges with neighbors and probabilty p of linking.</li>
@@ -384,6 +390,7 @@ vertex: Node ID.
 </li>
 </ol>
 <h3 id="BA-Model"><a href="#BA-Model" class="headerlink" title="BA Model"></a>BA Model</h3><p>The <a href="https://en.wikipedia.org/wiki/Barab%C3%A1si%E2%80%93Albert_model" target="_blank" rel="noopener">Barabási–Albert (BA) model</a> is an algorithm for generating random scale-free networks using a preferential attachment mechanism.</p>
+<p><img src="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/pictures/BA.png" width="80%" height="80%"></p>
 <p>Algorithm:</p>
 <ol>
 <li>Initialize adjacency matrix and number of edges to attach from a new node to existing nodes. Choose a initial vertex v, a target list and a repeated list both with size m.</li>
