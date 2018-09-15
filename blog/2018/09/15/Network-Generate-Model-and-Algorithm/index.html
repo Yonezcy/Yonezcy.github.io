@@ -81,17 +81,17 @@
 
 
 
-<meta name="description" content="This blog reveals some details of vital importance in python coding.  Sort() + lambda expressionLambda expression can be used to be the parameter ‘cmp’ of sort() to determine the way of sort. Default(">
+<meta name="description" content="Introduce some network models and their generating algorithms. ER ModelThe Erdős–Rényi model is either of two closely related models for generating random graphs.  In the model of Erdős and Rényi, all">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PYTHON DETAIL">
-<meta property="og:url" content="http://yonezcy.github.io/blog/2018/09/15/PYTHON-DETAIL/index.html">
+<meta property="og:title" content="Network Generate Model and Algorithm">
+<meta property="og:url" content="http://yonezcy.github.io/blog/2018/09/15/Network-Generate-Model-and-Algorithm/index.html">
 <meta property="og:site_name" content="Yonezcy">
-<meta property="og:description" content="This blog reveals some details of vital importance in python coding.  Sort() + lambda expressionLambda expression can be used to be the parameter ‘cmp’ of sort() to determine the way of sort. Default(">
+<meta property="og:description" content="Introduce some network models and their generating algorithms. ER ModelThe Erdős–Rényi model is either of two closely related models for generating random graphs.  In the model of Erdős and Rényi, all">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-15T07:49:13.000Z">
+<meta property="og:updated_time" content="2018-09-15T08:32:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PYTHON DETAIL">
-<meta name="twitter:description" content="This blog reveals some details of vital importance in python coding.  Sort() + lambda expressionLambda expression can be used to be the parameter ‘cmp’ of sort() to determine the way of sort. Default(">
+<meta name="twitter:title" content="Network Generate Model and Algorithm">
+<meta name="twitter:description" content="Introduce some network models and their generating algorithms. ER ModelThe Erdős–Rényi model is either of two closely related models for generating random graphs.  In the model of Erdős and Rényi, all">
 
 
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yonezcy.github.io/blog/2018/09/15/PYTHON-DETAIL/"/>
+  <link rel="canonical" href="http://yonezcy.github.io/blog/2018/09/15/Network-Generate-Model-and-Algorithm/"/>
 
 
 
 
 
-  <title>PYTHON DETAIL | Yonezcy</title>
+  <title>Network Generate Model and Algorithm | Yonezcy</title>
   
 
 
@@ -236,7 +236,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yonezcy.github.io/blog/2018/09/15/PYTHON-DETAIL/">
+    <link itemprop="mainEntityOfPage" href="http://yonezcy.github.io/blog/2018/09/15/Network-Generate-Model-and-Algorithm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhao Chenyu">
@@ -253,7 +253,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">PYTHON DETAIL</h1>
+          <h1 class="post-title" itemprop="name headline">Network Generate Model and Algorithm</h1>
         
 
         <div class="post-meta">
@@ -265,7 +265,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-15T15:04:41+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-15T15:53:38+08:00">
                 2018-09-15
               </time>
             
@@ -303,72 +303,119 @@
       
 
       
-        <p>This blog reveals some details of vital importance in python coding. </p>
-<h3 id="Sort-lambda-expression"><a href="#Sort-lambda-expression" class="headerlink" title="Sort() + lambda expression"></a>Sort() + lambda expression</h3><p>Lambda expression can be used to be the parameter ‘cmp’ of sort() to determine the way of sort.</p>
-<p>Default(Ascending order): </p>
-<pre><code>list.sort() = list.sort(cmp = lambda x, y: cmp(x, y))
-</code></pre><p>Descending order:</p>
-<pre><code>list.sort(cmp = lambda x, y: cmp(y, x))
-</code></pre><p>e.g. Given a list a = [‘1’, ‘9’, ‘3’, ‘5’, ‘7’], converge list element and return the biggest one.<br>Solution as follows:</p>
-<pre><code>a.sort(cmp = lambda x, y: cmp(y+x, x+y))
-&gt;&gt;&gt; a
-[&apos;9&apos;, &apos;7&apos;, &apos;5&apos;, &apos;3&apos;, &apos;1&apos;]
-</code></pre><h3 id="Zip"><a href="#Zip" class="headerlink" title="Zip"></a>Zip</h3><p>Zip function is used to merge two single elements into a (key, value) tuple.<br>e.g.</p>
-<pre><code>list_keys = [&apos;Country&apos;, &apos;Total&apos;]
-list_values = [[&apos;US&apos;, &apos;SU&apos;], [118, 73]]
-&gt;&gt;&gt; zip(list_keys, list_values)
-[(&apos;Country&apos;, [&apos;US&apos;, &apos;SU&apos;]), (&apos;Total&apos;, [118, 73])]
-</code></pre><p>Convert (key, value) pairs to dict:</p>
-<pre><code>&gt;&gt;&gt; dict(list(zip(list_keys, list_values)))
-{&apos;Country&apos;: [&apos;US&apos;, &apos;SU&apos;], &apos;Total&apos;: [118, 73]}
-</code></pre><h3 id="Generator"><a href="#Generator" class="headerlink" title="Generator:"></a>Generator:</h3><p>Generator will not create complete list in order to save space.<br>e.g. Create a generator:</p>
-<pre><code>&gt;&gt;&gt; g = (x * x for x in range(10))
-&gt;&gt;&gt; g
-&lt;generator object &lt;genexpr&gt; at 0x104feab40&gt;
-</code></pre><p>Visit elements:</p>
-<pre><code>&gt;&gt;&gt; g.next()
-0
-&gt;&gt;&gt; g.next()
-1
-&gt;&gt;&gt; g.next()
-4
-</code></pre><p>Iteration:</p>
-<pre><code>&gt;&gt;&gt; for n in g:
-...     print n
-...
-0
-1
-4
-</code></pre><p><strong>yield</strong> is used to return a value into generator.<br>Convert function into generator:</p>
-<pre><code>&gt;&gt;&gt; def generator():
-...     for i in range(3):
-...         yield i * i
-...
-&gt;&gt;&gt; g = generator()
-&gt;&gt;&gt; g
-&lt;generator object generator at 0x10a1671e0&gt;
-&gt;&gt;&gt; for i in g:
-...     print i
-...
-0
-1
-4
-</code></pre><h3 id="Conditional-operator"><a href="#Conditional-operator" class="headerlink" title="Conditional operator"></a>Conditional operator</h3><p>Condition operator has many forms in python:<br>if-else:</p>
-<pre><code>&gt;&gt;&gt; a = 1 if 1 &gt; 0 else 0
-&gt;&gt;&gt; a
-1
-&gt;&gt;&gt;
-</code></pre><p>list/tuple:</p>
-<pre><code>&gt;&gt;&gt; a = (1, 0)[1 &gt; 0]
-&gt;&gt;&gt; a
-0
-&gt;&gt;&gt;
-</code></pre><p>or: </p>
-<pre><code>&gt;&gt;&gt; a = [1, 0][1 &gt; 0]
-&gt;&gt;&gt; a
-0
-&gt;&gt;&gt;
-</code></pre><p>Notice that True/False represents 1/0 when they are index.</p>
+        <p>Introduce some network models and their generating algorithms.</p>
+<h3 id="ER-Model"><a href="#ER-Model" class="headerlink" title="ER Model"></a>ER Model</h3><p>The <a href="https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model" target="_blank" rel="noopener">Erdős–Rényi model</a> is either of two closely related models for generating random graphs. </p>
+<p>In the model of Erdős and Rényi, all graphs on a fixed vertex set with a fixed number of edges are equally likely; in the model introduced by Gilbert, each edge has a fixed probability of being present or absent, independently of the other edges. </p>
+<p><strong>Algorithm</strong></p>
+<ol>
+<li>Initialize adjacency matrix and probabilty p of linking.</li>
+<li>For all pairs of vertices, generating a random number~(0, 1). If this number is larger than p, add a edge between this pair of vertices.</li>
+<li>Do # step 2 until all vertices are choosed.</li>
+</ol>
+<p>A efficient way to implement:</p>
+<pre><code>def generateERGraph(graph_size, probability):
+  &quot;&quot;&quot;Generate a random Erdős-Rényi undirected graph.
+
+  Args:
+    graph_size: Number of nodes in the graph.
+
+  Returns:
+    graph: Adjacency matrix of the graph.
+  &quot;&quot;&quot;
+
+  # Initialize graph(represented by adjacency matrix).
+  n = graph_size
+  graph = np.zeros([n, n])
+  w = -1
+  lp = math.log(1.0 - probability)
+
+  # Nodes in graph are from 0, n-1 (start with v as the second node index).
+  v = 1
+  while v &lt; n:
+    lr = math.log(1.0 - random.random())
+    w = w + 1 + int(lr / lp)
+    while w &gt;= v and v &lt; n:
+      w = w - v
+      v = v + 1
+    if v &lt; n:
+      graph[v, w] = graph[w, v] = 1
+  return graph
+</code></pre><h3 id="WS-Small-World-Model"><a href="#WS-Small-World-Model" class="headerlink" title="WS Small World Model"></a>WS Small World Model</h3><p>The <a href="https://en.wikipedia.org/wiki/Watts%E2%80%93Strogatz_model" target="_blank" rel="noopener">Watts–Strogatz model</a> is a random graph generation model that produces graphs with small-world properties, including short average path lengths and high clustering.</p>
+<p>Algorithm:</p>
+<ol>
+<li>Initialize adjacency matrix, number of edges with neighbors and probabilty p of linking.</li>
+<li>Connect each node to its right k/2 neighbors.</li>
+<li><p>For each edge u-v in ring, with p, randomly selecting existing node w and add new edge u-w.</p>
+<p> def generateSmallWorldGraph(graph_size, num_neighbors):<br>   “””Generate a Watts–Strogatz small world graph.</p>
+<p>   Args:</p>
+<pre><code>graph_size: Number of nodes in the graph.
+num_neighbors: Number of edges with neighbors.
+</code></pre><p>   Return:</p>
+<pre><code>graph: Adjacency matrix of the graph.
+</code></pre><p>   “””</p>
+<h1 id="Initialize-graph-represented-by-adjacency-matrix"><a href="#Initialize-graph-represented-by-adjacency-matrix" class="headerlink" title="Initialize graph(represented by adjacency matrix)."></a>Initialize graph(represented by adjacency matrix).</h1><p>   n = graph_size<br>   k = num_neighbors<br>   graph = np.zeros([n, n])</p>
+<p>   nodes = range(n) # List of 0~n-1<br>   fromv = nodes</p>
+<h1 id="Connect-each-node-to-its-right-k-2-neighbors"><a href="#Connect-each-node-to-its-right-k-2-neighbors" class="headerlink" title="Connect each node to its right k/2 neighbors."></a>Connect each node to its right k/2 neighbors.</h1><p>   for i in range(1, k//2+1):</p>
+<pre><code>tov = fromv[i:] + fromv[:i]
+for j in range(n):
+  graph[fromv[j], tov[j]] = graph[tov[j], fromv[j]] = 1
+</code></pre><h1 id="For-each-edge-u-v-in-ring-with-PROBABILITY-randomly-selecting"><a href="#For-each-edge-u-v-in-ring-with-PROBABILITY-randomly-selecting" class="headerlink" title="For each edge u-v in ring, with PROBABILITY, randomly selecting"></a>For each edge u-v in ring, with PROBABILITY, randomly selecting</h1><h1 id="existing-node-w-and-add-new-edge-u-w"><a href="#existing-node-w-and-add-new-edge-u-w" class="headerlink" title="existing node w and add new edge u-w."></a>existing node w and add new edge u-w.</h1><p>   for u in range(n):</p>
+<pre><code>degree_u = calculateDegree(graph, u)
+for v in range(n):
+  if graph[u][v] &gt; 0 and PROBABILITY &gt; np.random.rand():
+    w = np.random.randint(n)
+    while u == w or graph[u][w] &gt; 0:
+      w = np.random.randint(n)
+      if degree_u &gt;= n-1:
+        break
+    else:
+      graph[u][w] = graph[w][u] = 1
+</code></pre><p>   return graph</p>
+<p> def calculateDegree(graph, vertex):<br>   “””Calculate degree of the node in the graph.</p>
+<p>   Args:</p>
+<pre><code>graph: Adjacency matrix.
+vertex: Node ID.
+</code></pre><p>   Returns:</p>
+<pre><code>degree: Degree of the node.
+</code></pre><p>   “””<br>   n = len(graph)<br>   degree = 0<br>   for j in range(n):</p>
+<pre><code>if graph[vertex][j] &gt; 0:
+  degree += 1
+</code></pre><p>   return degree</p>
+</li>
+</ol>
+<h3 id="BA-Model"><a href="#BA-Model" class="headerlink" title="BA Model"></a>BA Model</h3><p>The <a href="https://en.wikipedia.org/wiki/Barab%C3%A1si%E2%80%93Albert_model" target="_blank" rel="noopener">Barabási–Albert (BA) model</a> is an algorithm for generating random scale-free networks using a preferential attachment mechanism.</p>
+<p>Algorithm:</p>
+<ol>
+<li>Initialize adjacency matrix and number of edges to attach from a new node to existing nodes. Choose a initial vertex v, a target list and a repeated list both with size m.</li>
+<li>Link v and vertices from target.</li>
+<li>Add [v]*m and all vertices from target to repeated list.</li>
+<li><p>Update target list by randomly choosing m vertices from repeated list and then choose a new vertex v to go # step 2.</p>
+<p> def generateBAGraph(graph_size, num_new_edges):<br>   “””Generate a Barabási–Albert preferential attachment model graph.</p>
+<p>   Args:</p>
+<pre><code>graph_size: Number of nodes in the graph.
+num_new_edges:  Number of edges to attach from a new node to existing nodes.
+</code></pre><p>   Returns:</p>
+<pre><code>graph: Adjacency matrix of the graph.
+</code></pre><p>   “””</p>
+<h1 id="Initialize-graph-represented-by-adjacency-matrix-1"><a href="#Initialize-graph-represented-by-adjacency-matrix-1" class="headerlink" title="Initialize graph(represented by adjacency matrix)."></a>Initialize graph(represented by adjacency matrix).</h1><p>   n = graph_size<br>   m = num_new_edges<br>   graph = np.zeros([n, n])</p>
+<p>   targets = range(m) # Target nodes for new edges<br>   repeated_nodes = [] # List of existing nodes</p>
+<h1 id="Start-adding-edge-from-m"><a href="#Start-adding-edge-from-m" class="headerlink" title="Start adding edge from m."></a>Start adding edge from m.</h1><p>   source = m<br>   while source &lt; n:</p>
+<pre><code># Link target nodes and source.
+for i in range(m):
+  graph[source, targets[i]] = graph[targets[i], source] = 1
+
+# Add target to repeated list(each node has been linked once).
+repeated_nodes.extend(targets)
+
+# Add source to repeated list(each node has been linked once).
+repeated_nodes.extend([source] * m)
+
+# Randomly get m nodes from repeated list to form new target.
+targets = random.sample(repeated_nodes, m)
+source += 1
+</code></pre><p>   return graph</p>
+</li>
+</ol>
 
       
     </div>
@@ -393,8 +440,8 @@ list_values = [[&apos;US&apos;, &apos;SU&apos;], [118, 73]]
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2018/08/29/Graph-Theory/" rel="next" title="Graph Theory">
-                <i class="fa fa-chevron-left"></i> Graph Theory
+              <a href="/blog/2018/09/15/PYTHON-DETAIL/" rel="next" title="PYTHON DETAIL">
+                <i class="fa fa-chevron-left"></i> PYTHON DETAIL
               </a>
             
           </div>
@@ -402,10 +449,6 @@ list_values = [[&apos;US&apos;, &apos;SU&apos;], [118, 73]]
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/blog/2018/09/15/Network-Generate-Model-and-Algorithm/" rel="prev" title="Network Generate Model and Algorithm">
-                Network Generate Model and Algorithm <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -542,7 +585,7 @@ list_values = [[&apos;US&apos;, &apos;SU&apos;], [118, 73]]
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sort-lambda-expression"><span class="nav-number">1.</span> <span class="nav-text">Sort() + lambda expression</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zip"><span class="nav-number">2.</span> <span class="nav-text">Zip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generator"><span class="nav-number">3.</span> <span class="nav-text">Generator:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conditional-operator"><span class="nav-number">4.</span> <span class="nav-text">Conditional operator</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ER-Model"><span class="nav-number">1.</span> <span class="nav-text">ER Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WS-Small-World-Model"><span class="nav-number">2.</span> <span class="nav-text">WS Small World Model</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Initialize-graph-represented-by-adjacency-matrix"><span class="nav-number"></span> <span class="nav-text">Initialize graph(represented by adjacency matrix).</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Connect-each-node-to-its-right-k-2-neighbors"><span class="nav-number"></span> <span class="nav-text">Connect each node to its right k/2 neighbors.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#For-each-edge-u-v-in-ring-with-PROBABILITY-randomly-selecting"><span class="nav-number"></span> <span class="nav-text">For each edge u-v in ring, with PROBABILITY, randomly selecting</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#existing-node-w-and-add-new-edge-u-w"><span class="nav-number"></span> <span class="nav-text">existing node w and add new edge u-w.</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BA-Model"><span class="nav-number">1.</span> <span class="nav-text">BA Model</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Initialize-graph-represented-by-adjacency-matrix-1"><span class="nav-number"></span> <span class="nav-text">Initialize graph(represented by adjacency matrix).</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Start-adding-edge-from-m"><span class="nav-number"></span> <span class="nav-text">Start adding edge from m.</span></a></div>
             
 
           </div>
