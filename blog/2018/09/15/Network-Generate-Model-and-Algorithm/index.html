@@ -91,7 +91,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/pictures/ER.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/pictures/WS.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/pictures/BA.png">
-<meta property="og:updated_time" content="2018-09-15T08:46:52.000Z">
+<meta property="og:updated_time" content="2018-09-15T08:50:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Network Generate Model and Algorithm">
 <meta name="twitter:description" content="Introduce some network models and their generating algorithms. ER ModelThe Erdős–Rényi model is either of two closely related models for generating random graphs.  In the model of Erdős and Rényi, all">
@@ -417,34 +417,46 @@ def calculateDegree(graph, vertex):
 <li>Initialize adjacency matrix and number of edges to attach from a new node to existing nodes. Choose a initial vertex v, a target list and a repeated list both with size m.</li>
 <li>Link v and vertices from target.</li>
 <li>Add [v]*m and all vertices from target to repeated list.</li>
-<li><p>Update target list by randomly choosing m vertices from repeated list and then choose a new vertex v to go # step 2.</p>
-<p> def generateBAGraph(graph_size, num_new_edges):<br>   “””Generate a Barabási–Albert preferential attachment model graph.</p>
-<p>   Args:</p>
-<pre><code>graph_size: Number of nodes in the graph.
-num_new_edges:  Number of edges to attach from a new node to existing nodes.
-</code></pre><p>   Returns:</p>
-<pre><code>graph: Adjacency matrix of the graph.
-</code></pre><p>   “””</p>
-<h1 id="Initialize-graph-represented-by-adjacency-matrix"><a href="#Initialize-graph-represented-by-adjacency-matrix" class="headerlink" title="Initialize graph(represented by adjacency matrix)."></a>Initialize graph(represented by adjacency matrix).</h1><p>   n = graph_size<br>   m = num_new_edges<br>   graph = np.zeros([n, n])</p>
-<p>   targets = range(m) # Target nodes for new edges<br>   repeated_nodes = [] # List of existing nodes</p>
-<h1 id="Start-adding-edge-from-m"><a href="#Start-adding-edge-from-m" class="headerlink" title="Start adding edge from m."></a>Start adding edge from m.</h1><p>   source = m<br>   while source &lt; n:</p>
-<pre><code># Link target nodes and source.
-for i in range(m):
-  graph[source, targets[i]] = graph[targets[i], source] = 1
-
-# Add target to repeated list(each node has been linked once).
-repeated_nodes.extend(targets)
-
-# Add source to repeated list(each node has been linked once).
-repeated_nodes.extend([source] * m)
-
-# Randomly get m nodes from repeated list to form new target.
-targets = random.sample(repeated_nodes, m)
-source += 1
-</code></pre><p>   return graph</p>
-</li>
+<li>Update target list by randomly choosing m vertices from repeated list and then choose a new vertex v to go # step 2.</li>
 </ol>
+<pre><code>def generateBAGraph(graph_size, num_new_edges):
+  &quot;&quot;&quot;Generate a Barabási–Albert preferential attachment model graph.
 
+  Args:
+    graph_size: Number of nodes in the graph.
+    num_new_edges:  Number of edges to attach from a new node to existing nodes.
+
+  Returns:
+    graph: Adjacency matrix of the graph.
+  &quot;&quot;&quot;
+
+  # Initialize graph(represented by adjacency matrix).
+  n = graph_size
+  m = num_new_edges
+  graph = np.zeros([n, n])
+
+  targets = range(m) # Target nodes for new edges
+  repeated_nodes = [] # List of existing nodes
+
+  # Start adding edge from m.
+  source = m
+  while source &lt; n:
+    # Link target nodes and source.
+    for i in range(m):
+      graph[source, targets[i]] = graph[targets[i], source] = 1
+
+    # Add target to repeated list(each node has been linked once).
+    repeated_nodes.extend(targets)
+
+    # Add source to repeated list(each node has been linked once).
+    repeated_nodes.extend([source] * m)
+
+    # Randomly get m nodes from repeated list to form new target.
+    targets = random.sample(repeated_nodes, m)
+    source += 1
+
+  return graph
+</code></pre>
       
     </div>
     
@@ -613,7 +625,7 @@ source += 1
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ER-Model"><span class="nav-number">1.</span> <span class="nav-text">ER Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WS-Small-World-Model"><span class="nav-number">2.</span> <span class="nav-text">WS Small World Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BA-Model"><span class="nav-number">3.</span> <span class="nav-text">BA Model</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Initialize-graph-represented-by-adjacency-matrix"><span class="nav-number"></span> <span class="nav-text">Initialize graph(represented by adjacency matrix).</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Start-adding-edge-from-m"><span class="nav-number"></span> <span class="nav-text">Start adding edge from m.</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ER-Model"><span class="nav-number">1.</span> <span class="nav-text">ER Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WS-Small-World-Model"><span class="nav-number">2.</span> <span class="nav-text">WS Small World Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BA-Model"><span class="nav-number">3.</span> <span class="nav-text">BA Model</span></a></li></ol></div>
             
 
           </div>
