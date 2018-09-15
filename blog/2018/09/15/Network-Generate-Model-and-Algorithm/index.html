@@ -91,7 +91,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/pictures/ER.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/pictures/WS.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/pictures/BA.png">
-<meta property="og:updated_time" content="2018-09-15T08:42:28.000Z">
+<meta property="og:updated_time" content="2018-09-15T08:46:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Network Generate Model and Algorithm">
 <meta name="twitter:description" content="Introduce some network models and their generating algorithms. ER ModelThe Erdős–Rényi model is either of two closely related models for generating random graphs.  In the model of Erdős and Rényi, all">
@@ -347,51 +347,72 @@
   return graph
 </code></pre><h3 id="WS-Small-World-Model"><a href="#WS-Small-World-Model" class="headerlink" title="WS Small World Model"></a>WS Small World Model</h3><p>The <a href="https://en.wikipedia.org/wiki/Watts%E2%80%93Strogatz_model" target="_blank" rel="noopener">Watts–Strogatz model</a> is a random graph generation model that produces graphs with small-world properties, including short average path lengths and high clustering.</p>
 <p><img src="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/pictures/WS.png" width="80%" height="80%"></p>
-<p>Algorithm:</p>
+<p><strong>Algorithm</strong></p>
 <ol>
 <li>Initialize adjacency matrix, number of edges with neighbors and probabilty p of linking.</li>
 <li>Connect each node to its right k/2 neighbors.</li>
-<li><p>For each edge u-v in ring, with p, randomly selecting existing node w and add new edge u-w.</p>
-<p> def generateSmallWorldGraph(graph_size, num_neighbors):<br>   “””Generate a Watts–Strogatz small world graph.</p>
-<p>   Args:</p>
-<pre><code>graph_size: Number of nodes in the graph.
-num_neighbors: Number of edges with neighbors.
-</code></pre><p>   Return:</p>
-<pre><code>graph: Adjacency matrix of the graph.
-</code></pre><p>   “””</p>
-<h1 id="Initialize-graph-represented-by-adjacency-matrix"><a href="#Initialize-graph-represented-by-adjacency-matrix" class="headerlink" title="Initialize graph(represented by adjacency matrix)."></a>Initialize graph(represented by adjacency matrix).</h1><p>   n = graph_size<br>   k = num_neighbors<br>   graph = np.zeros([n, n])</p>
-<p>   nodes = range(n) # List of 0~n-1<br>   fromv = nodes</p>
-<h1 id="Connect-each-node-to-its-right-k-2-neighbors"><a href="#Connect-each-node-to-its-right-k-2-neighbors" class="headerlink" title="Connect each node to its right k/2 neighbors."></a>Connect each node to its right k/2 neighbors.</h1><p>   for i in range(1, k//2+1):</p>
-<pre><code>tov = fromv[i:] + fromv[:i]
-for j in range(n):
-  graph[fromv[j], tov[j]] = graph[tov[j], fromv[j]] = 1
-</code></pre><h1 id="For-each-edge-u-v-in-ring-with-PROBABILITY-randomly-selecting"><a href="#For-each-edge-u-v-in-ring-with-PROBABILITY-randomly-selecting" class="headerlink" title="For each edge u-v in ring, with PROBABILITY, randomly selecting"></a>For each edge u-v in ring, with PROBABILITY, randomly selecting</h1><h1 id="existing-node-w-and-add-new-edge-u-w"><a href="#existing-node-w-and-add-new-edge-u-w" class="headerlink" title="existing node w and add new edge u-w."></a>existing node w and add new edge u-w.</h1><p>   for u in range(n):</p>
-<pre><code>degree_u = calculateDegree(graph, u)
-for v in range(n):
-  if graph[u][v] &gt; 0 and PROBABILITY &gt; np.random.rand():
-    w = np.random.randint(n)
-    while u == w or graph[u][w] &gt; 0:
-      w = np.random.randint(n)
-      if degree_u &gt;= n-1:
-        break
-    else:
-      graph[u][w] = graph[w][u] = 1
-</code></pre><p>   return graph</p>
-<p> def calculateDegree(graph, vertex):<br>   “””Calculate degree of the node in the graph.</p>
-<p>   Args:</p>
-<pre><code>graph: Adjacency matrix.
-vertex: Node ID.
-</code></pre><p>   Returns:</p>
-<pre><code>degree: Degree of the node.
-</code></pre><p>   “””<br>   n = len(graph)<br>   degree = 0<br>   for j in range(n):</p>
-<pre><code>if graph[vertex][j] &gt; 0:
-  degree += 1
-</code></pre><p>   return degree</p>
-</li>
+<li>For each edge u-v in ring, with p, randomly selecting existing node w and add new edge u-w.</li>
 </ol>
-<h3 id="BA-Model"><a href="#BA-Model" class="headerlink" title="BA Model"></a>BA Model</h3><p>The <a href="https://en.wikipedia.org/wiki/Barab%C3%A1si%E2%80%93Albert_model" target="_blank" rel="noopener">Barabási–Albert (BA) model</a> is an algorithm for generating random scale-free networks using a preferential attachment mechanism.</p>
+<pre><code>def generateSmallWorldGraph(graph_size, num_neighbors):
+  &quot;&quot;&quot;Generate a Watts–Strogatz small world graph.
+
+  Args:
+    graph_size: Number of nodes in the graph.
+    num_neighbors: Number of edges with neighbors.
+
+  Return:
+    graph: Adjacency matrix of the graph.
+  &quot;&quot;&quot;
+
+  # Initialize graph(represented by adjacency matrix).
+  n = graph_size
+  k = num_neighbors
+  graph = np.zeros([n, n])
+
+  nodes = range(n) # List of 0~n-1
+  fromv = nodes
+
+  # Connect each node to its right k/2 neighbors.
+  for i in range(1, k//2+1):
+    tov = fromv[i:] + fromv[:i]
+    for j in range(n):
+      graph[fromv[j], tov[j]] = graph[tov[j], fromv[j]] = 1
+
+  # For each edge u-v in ring, with PROBABILITY, randomly selecting
+  # existing node w and add new edge u-w.
+  for u in range(n):
+    degree_u = calculateDegree(graph, u)
+    for v in range(n):
+      if graph[u][v] &gt; 0 and PROBABILITY &gt; np.random.rand():
+        w = np.random.randint(n)
+        while u == w or graph[u][w] &gt; 0:
+          w = np.random.randint(n)
+          if degree_u &gt;= n-1:
+            break
+        else:
+          graph[u][w] = graph[w][u] = 1
+
+  return graph
+
+def calculateDegree(graph, vertex):
+  &quot;&quot;&quot;Calculate degree of the node in the graph.
+
+  Args:
+    graph: Adjacency matrix.
+    vertex: Node ID.
+
+  Returns:
+    degree: Degree of the node.
+  &quot;&quot;&quot;
+  n = len(graph)
+  degree = 0
+  for j in range(n):
+    if graph[vertex][j] &gt; 0:
+      degree += 1
+  return degree
+</code></pre><h3 id="BA-Model"><a href="#BA-Model" class="headerlink" title="BA Model"></a>BA Model</h3><p>The <a href="https://en.wikipedia.org/wiki/Barab%C3%A1si%E2%80%93Albert_model" target="_blank" rel="noopener">Barabási–Albert (BA) model</a> is an algorithm for generating random scale-free networks using a preferential attachment mechanism.</p>
 <p><img src="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/pictures/BA.png" width="80%" height="80%"></p>
-<p>Algorithm:</p>
+<p><strong>Algorithm</strong></p>
 <ol>
 <li>Initialize adjacency matrix and number of edges to attach from a new node to existing nodes. Choose a initial vertex v, a target list and a repeated list both with size m.</li>
 <li>Link v and vertices from target.</li>
@@ -404,7 +425,7 @@ num_new_edges:  Number of edges to attach from a new node to existing nodes.
 </code></pre><p>   Returns:</p>
 <pre><code>graph: Adjacency matrix of the graph.
 </code></pre><p>   “””</p>
-<h1 id="Initialize-graph-represented-by-adjacency-matrix-1"><a href="#Initialize-graph-represented-by-adjacency-matrix-1" class="headerlink" title="Initialize graph(represented by adjacency matrix)."></a>Initialize graph(represented by adjacency matrix).</h1><p>   n = graph_size<br>   m = num_new_edges<br>   graph = np.zeros([n, n])</p>
+<h1 id="Initialize-graph-represented-by-adjacency-matrix"><a href="#Initialize-graph-represented-by-adjacency-matrix" class="headerlink" title="Initialize graph(represented by adjacency matrix)."></a>Initialize graph(represented by adjacency matrix).</h1><p>   n = graph_size<br>   m = num_new_edges<br>   graph = np.zeros([n, n])</p>
 <p>   targets = range(m) # Target nodes for new edges<br>   repeated_nodes = [] # List of existing nodes</p>
 <h1 id="Start-adding-edge-from-m"><a href="#Start-adding-edge-from-m" class="headerlink" title="Start adding edge from m."></a>Start adding edge from m.</h1><p>   source = m<br>   while source &lt; n:</p>
 <pre><code># Link target nodes and source.
@@ -592,7 +613,7 @@ source += 1
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ER-Model"><span class="nav-number">1.</span> <span class="nav-text">ER Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WS-Small-World-Model"><span class="nav-number">2.</span> <span class="nav-text">WS Small World Model</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Initialize-graph-represented-by-adjacency-matrix"><span class="nav-number"></span> <span class="nav-text">Initialize graph(represented by adjacency matrix).</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Connect-each-node-to-its-right-k-2-neighbors"><span class="nav-number"></span> <span class="nav-text">Connect each node to its right k/2 neighbors.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#For-each-edge-u-v-in-ring-with-PROBABILITY-randomly-selecting"><span class="nav-number"></span> <span class="nav-text">For each edge u-v in ring, with PROBABILITY, randomly selecting</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#existing-node-w-and-add-new-edge-u-w"><span class="nav-number"></span> <span class="nav-text">existing node w and add new edge u-w.</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BA-Model"><span class="nav-number">1.</span> <span class="nav-text">BA Model</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Initialize-graph-represented-by-adjacency-matrix-1"><span class="nav-number"></span> <span class="nav-text">Initialize graph(represented by adjacency matrix).</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Start-adding-edge-from-m"><span class="nav-number"></span> <span class="nav-text">Start adding edge from m.</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ER-Model"><span class="nav-number">1.</span> <span class="nav-text">ER Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WS-Small-World-Model"><span class="nav-number">2.</span> <span class="nav-text">WS Small World Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BA-Model"><span class="nav-number">3.</span> <span class="nav-text">BA Model</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Initialize-graph-represented-by-adjacency-matrix"><span class="nav-number"></span> <span class="nav-text">Initialize graph(represented by adjacency matrix).</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Start-adding-edge-from-m"><span class="nav-number"></span> <span class="nav-text">Start adding edge from m.</span></a></div>
             
 
           </div>
