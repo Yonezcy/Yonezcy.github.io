@@ -103,17 +103,17 @@
 
 
 
-<meta name="description" content="A new challenge is coming. Let’s get it!">
+<meta name="description" content="Presenting foundamental concepts and mapreduce algorithm.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Setting Sail">
-<meta property="og:url" content="http://yonezcy.github.io/blog/2018/08/14/settingsail/index.html">
+<meta property="og:title" content="MapReduce">
+<meta property="og:url" content="http://yonezcy.github.io/blog/2018/09/16/MapReduce/index.html">
 <meta property="og:site_name" content="Yonezcy">
-<meta property="og:description" content="A new challenge is coming. Let’s get it!">
+<meta property="og:description" content="Presenting foundamental concepts and mapreduce algorithm.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-12T04:16:46.000Z">
+<meta property="og:updated_time" content="2018-09-16T13:40:07.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Setting Sail">
-<meta name="twitter:description" content="A new challenge is coming. Let’s get it!">
+<meta name="twitter:title" content="MapReduce">
+<meta name="twitter:description" content="Presenting foundamental concepts and mapreduce algorithm.">
 
 
 
@@ -143,13 +143,13 @@
 
 
 
-  <link rel="canonical" href="http://yonezcy.github.io/blog/2018/08/14/settingsail/"/>
+  <link rel="canonical" href="http://yonezcy.github.io/blog/2018/09/16/MapReduce/"/>
 
 
 
 
 
-  <title>Setting Sail | Yonezcy</title>
+  <title>MapReduce | Yonezcy</title>
   
 
 
@@ -258,7 +258,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yonezcy.github.io/blog/2018/08/14/settingsail/">
+    <link itemprop="mainEntityOfPage" href="http://yonezcy.github.io/blog/2018/09/16/MapReduce/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhao Chenyu">
@@ -275,7 +275,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Setting Sail</h1>
+          <h1 class="post-title" itemprop="name headline">MapReduce</h1>
         
 
         <div class="post-meta">
@@ -287,8 +287,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-14T22:25:11+08:00">
-                2018-08-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-16T18:53:28+08:00">
+                2018-09-16
               </time>
             
 
@@ -325,7 +325,138 @@
       
 
       
-        <p>A new challenge is coming. Let’s get it!</p>
+        <p>Presenting foundamental concepts and mapreduce algorithm.<br><a id="more"></a></p>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p>Suppose there is a dataset about citation. Each file has some citation information. (For instance: journals/ai/Hernandez-Orallo00:::José Hernández-Orallo:::Truth from Trash. How Learning Makes Sense by Chris Thornton). Journal, author’s name and other information have been splitted from “:::” or “::”.</p>
+<p>Our target is to write down a map-reduce algorithm to make an efficient way in order to find authors’ most interested words. In order words, we should count the words frequency of every author.</p>
+<p>So, if we do that without any distributed solutions, what can we do? The answer is write down two cycles for each file and each sample to count. </p>
+<p>Consider we have a lot of machines which can run local tasks. The distributed solution is we can split our tasks from one machine to several machines. And then run their own task locally. Finally merge their answers.</p>
+<h4 id="mincemeat"><a href="#mincemeat" class="headerlink" title="mincemeat"></a>mincemeat</h4><p>Mincemeat is a framework of mapreduce in order to let users apply mapreduce tasks. Mincemeat has implemented a connection between client and server. So, the thing we should do is to implement map and reduce function.</p>
+<p>An example of map and reduce function to count words frequency from <a href="http://appsrv.cse.cuhk.edu.hk/~cmsc5741/doku.php?id=home" target="_blank" rel="noopener">CUHK CMSC5741</a>.</p>
+<pre><code>import mincemeat
+import stopwords
+import glob
+
+text_files = glob.glob(&apos;./data/*&apos;)
+
+def file_contents(file_name):
+    f = open(file_name)
+    try:
+        return f.read()
+    finally:
+        f.close()
+
+# The data source can be any dictionary-like object
+datasource = dict((file_name, file_contents(file_name))
+                  for file_name in text_files)
+
+def mapfn(k, v):
+    &quot;&quot;&quot;Generate &lt;k, v&gt; pairs for all mappers.
+
+    Args:
+        k: Document name.
+        v: Text of Document.
+
+    Returns:
+        &lt;author_name, words&gt; pairs.
+    &quot;&quot;&quot;
+    for line in v.splitlines():
+        info = line.split(&apos;:::&apos;)
+        title = info[2]
+        author = info[1].split(&apos;::&apos;)
+        words = title.split()
+        for w in words:
+            w = w.replace(&apos;.&apos;,&apos;&apos;)
+            w = w.replace(&apos;,&apos;,&apos;&apos;)
+            w = w.replace(&apos;?&apos;,&apos;&apos;)
+            w = w.replace(&apos;!&apos;,&apos;&apos;)
+            w = w.replace(&apos;:&apos;,&apos;&apos;)
+            w = w.replace(&apos;;&apos;,&apos;&apos;)
+            w = w.replace(&apos;+&apos;,&apos;&apos;)
+            w = w.replace(&apos;-&apos;,&apos; &apos;)
+            w = w.replace(&apos;*&apos;,&apos;&apos;)
+            w = w.replace(&apos;/&apos;,&apos;&apos;)
+            w = w.replace(&apos;(&apos;,&apos;&apos;)
+            w = w.replace(&apos;)&apos;,&apos;&apos;)
+            w = w.replace(&apos;&lt;&apos;,&apos;&apos;)
+            w = w.replace(&apos;&gt;&apos;,&apos;&apos;)
+            w = w.replace(&apos;{&apos;,&apos;&apos;)
+            w = w.replace(&apos;}&apos;,&apos;&apos;)
+            w = w.lower()
+            if len(w) &gt; 1 and not stopwords.allStopWords.has_key(w):
+                for a in author:
+                    yield a, w
+
+def reducefn(k, vs):
+    &quot;&quot;&quot;Count words frequency.
+
+    Mapdone operation generates dicts {&apos;author_name&apos;, list(words)} to input reducefn.
+
+    Args:
+        k: Author name.
+        vs: List of words belong to a specific author.
+
+    Returns:
+        result: Dict of {&apos;word&apos;, &apos;frequency&apos;}.
+    &quot;&quot;&quot;
+    result = {}
+    for v in vs:
+        if result.has_key(v):
+            result[v] = result[v] + 1
+        else:
+            result[v] = 1
+    return result
+
+s = mincemeat.Server()
+s.datasource = datasource
+s.mapfn = mapfn
+s.reducefn = reducefn
+
+results = s.run_server(password=&quot;changeme&quot;)
+#print results[&apos;Philip S. Yu&apos;]
+#print results[&apos;Donald F. Towsley&apos;]
+print &apos;Top 10 terms in Philip S. Yu\&apos;s title&apos;
+results = sorted(results[&apos;Philip S. Yu&apos;].items(), key = lambda x: x[1], reverse=True)
+for i in range(10):
+    w, c = results[i]
+    print &apos;%s\t%d&apos; % (w, c)
+</code></pre><h4 id="What-can-we-learn-from-this-code-fragment"><a href="#What-can-we-learn-from-this-code-fragment" class="headerlink" title="What can we learn from this code fragment?"></a>What can we learn from this code fragment?</h4><p>One thing we notice is the input parameter of map and reduce. First, let we take a look at mapfn(). The parameter k, v refers to document name and text of the document. So, our inputs are single document name and text of it. And next, the parameters of reduce function are author name and his/her words frequency and also from an instance. Therefore, how about intermediary? Why we can only input the key as one single document or author? The answer is quiet obviously that mincemeat has already designed whole transmission process for us. So, it’s time to have a look on mincemeat.</p>
+<h4 id="Callmap-and-Callreduce"><a href="#Callmap-and-Callreduce" class="headerlink" title="Callmap and Callreduce"></a>Callmap and Callreduce</h4><pre><code>def call_mapfn(self, command, data):
+    logging.info(&quot;Mapping %s&quot; % str(data[0]))
+    results = {}
+    for k, v in self.mapfn(data[0], data[1]):
+        if k not in results:
+            results[k] = []
+        results[k].append(v)
+    if self.collectfn:
+        for k in results:
+            results[k] = [self.collectfn(k, results[k])]
+    self.send_command(&apos;mapdone&apos;, (data[0], results))
+
+def call_reducefn(self, command, data):
+    logging.info(&quot;Reducing %s&quot; % str(data[0]))
+    results = self.reducefn(data[0], data[1])
+    self.send_command(&apos;reducedone&apos;, (data[0], results))
+</code></pre><p>This is code segment of mincemeat which calls map and reduce function. From that, we can see these two methods call map and reduce function. And then call mapdone and reducedone function with returns.</p>
+<h4 id="Mapdone-and-reducedone"><a href="#Mapdone-and-reducedone" class="headerlink" title="Mapdone and reducedone"></a>Mapdone and reducedone</h4><pre><code>def map_done(self, data):
+    # Don&apos;t use the results if they&apos;ve already been counted
+    if not data[0] in self.working_maps:
+        return
+
+    for (key, values) in data[1].iteritems():
+        if key not in self.map_results:
+            self.map_results[key] = []
+        self.map_results[key].extend(values)
+    del self.working_maps[data[0]]
+
+def reduce_done(self, data):
+    # Don&apos;t use the results if they&apos;ve already been counted
+    if not data[0] in self.working_reduces:
+        return
+
+    self.results[data[0]] = data[1]
+    del self.working_reduces[data[0]]
+</code></pre><p>These two methods call the method we mentioned above and store the final result. So, the question is what’s the whole process of map and reduce? How can we combine these methods with foundamental map and reduce operation?</p>
+<h4 id="Process-analysis"><a href="#Process-analysis" class="headerlink" title="Process analysis"></a>Process analysis</h4><p>Back soon.</p>
 
       
     </div>
@@ -350,15 +481,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/blog/2018/09/15/Pandas-Foundation/" rel="next" title="Pandas Foundation">
+                <i class="fa fa-chevron-left"></i> Pandas Foundation
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/blog/2018/08/29/Graph-Theory/" rel="prev" title="Graph Theory">
-                Graph Theory <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -410,8 +541,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -476,6 +616,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Example"><span class="nav-number">1.</span> <span class="nav-text">Example</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mincemeat"><span class="nav-number">1.1.</span> <span class="nav-text">mincemeat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#What-can-we-learn-from-this-code-fragment"><span class="nav-number">1.2.</span> <span class="nav-text">What can we learn from this code fragment?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Callmap-and-Callreduce"><span class="nav-number">1.3.</span> <span class="nav-text">Callmap and Callreduce</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mapdone-and-reducedone"><span class="nav-number">1.4.</span> <span class="nav-text">Mapdone and reducedone</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Process-analysis"><span class="nav-number">1.5.</span> <span class="nav-text">Process analysis</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
