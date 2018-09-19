@@ -106,7 +106,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/Undirected_Graph.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/Adjacency_matrix.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/Ajacency_list.png">
-<meta property="og:updated_time" content="2018-09-19T08:45:01.000Z">
+<meta property="og:updated_time" content="2018-09-19T09:25:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Graph Theory">
 <meta name="twitter:description" content="Introduce some basic concepts and algorithms about graph theory.">
@@ -334,7 +334,7 @@
   for w in range(n):
     if graph[v][w] == 1 and not visit[w]:
       DFS(w)
-</code></pre><h4 id="2-Breadth-First-Search"><a href="#2-Breadth-First-Search" class="headerlink" title="2. Breadth First Search"></a>2. Breadth First Search</h4><p>1] Vist vertex v.<br>2] Find all adjacency vertices in set V_new, and store them in a queue Q.<br>3] Visit v_news in V_new.<br>4] For v_new in Q, repeat step #2,3 until all queues are null.</p>
+</code></pre><h4 id="2-Breadth-First-Search"><a href="#2-Breadth-First-Search" class="headerlink" title="2. Breadth First Search"></a>2. Breadth First Search</h4><p>1] Visit vertex v.<br>2] Visit all adjacency vertices of v, and put them in the queue Q.<br>3] Visit v_news in V_new.<br>4] For v_new in Q, repeat step #2,3 until queue is null.</p>
 <pre><code>def BFS(v):
   visit[v] = 1
   queue = Queue.Queue()
