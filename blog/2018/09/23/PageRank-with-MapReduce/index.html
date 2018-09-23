@@ -96,17 +96,17 @@
 
 
 
-<meta name="description" content="This blog reveals some details of vital importance in python coding.">
+<meta name="description" content="Pagerank algorithm and its mapreduce implementation.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PYTHON DETAIL">
-<meta property="og:url" content="http://yonezcy.github.io/blog/2018/09/15/PYTHON-DETAIL/index.html">
+<meta property="og:title" content="PageRank with MapReduce">
+<meta property="og:url" content="http://yonezcy.github.io/blog/2018/09/23/PageRank-with-MapReduce/index.html">
 <meta property="og:site_name" content="Yonezcy">
-<meta property="og:description" content="This blog reveals some details of vital importance in python coding.">
+<meta property="og:description" content="Pagerank algorithm and its mapreduce implementation.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-15T08:56:53.000Z">
+<meta property="og:updated_time" content="2018-09-23T07:33:57.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PYTHON DETAIL">
-<meta name="twitter:description" content="This blog reveals some details of vital importance in python coding.">
+<meta name="twitter:title" content="PageRank with MapReduce">
+<meta name="twitter:description" content="Pagerank algorithm and its mapreduce implementation.">
 
 
 
@@ -136,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://yonezcy.github.io/blog/2018/09/15/PYTHON-DETAIL/"/>
+  <link rel="canonical" href="http://yonezcy.github.io/blog/2018/09/23/PageRank-with-MapReduce/"/>
 
 
 
 
 
-  <title>PYTHON DETAIL | Yonezcy</title>
+  <title>PageRank with MapReduce | Yonezcy</title>
   
 
 
@@ -251,7 +251,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yonezcy.github.io/blog/2018/09/15/PYTHON-DETAIL/">
+    <link itemprop="mainEntityOfPage" href="http://yonezcy.github.io/blog/2018/09/23/PageRank-with-MapReduce/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhao Chenyu">
@@ -268,7 +268,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">PYTHON DETAIL</h1>
+          <h1 class="post-title" itemprop="name headline">PageRank with MapReduce</h1>
         
 
         <div class="post-meta">
@@ -280,8 +280,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-15T15:04:41+08:00">
-                2018-09-15
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-23T14:08:14+08:00">
+                2018-09-23
               </time>
             
 
@@ -318,73 +318,19 @@
       
 
       
-        <p>This blog reveals some details of vital importance in python coding.<br><a id="more"></a></p>
-<h3 id="Sort-lambda-expression"><a href="#Sort-lambda-expression" class="headerlink" title="Sort() + lambda expression"></a>Sort() + lambda expression</h3><p>Lambda expression can be used to be the parameter ‘cmp’ of sort() to determine the way of sort.</p>
-<p>Default(Ascending order): </p>
-<pre><code>list.sort() = list.sort(cmp = lambda x, y: cmp(x, y))
-</code></pre><p>Descending order:</p>
-<pre><code>list.sort(cmp = lambda x, y: cmp(y, x))
-</code></pre><p>e.g. Given a list a = [‘1’, ‘9’, ‘3’, ‘5’, ‘7’], converge list element and return the biggest one.<br>Solution as follows:</p>
-<pre><code>a.sort(cmp = lambda x, y: cmp(y+x, x+y))
-&gt;&gt;&gt; a
-[&apos;9&apos;, &apos;7&apos;, &apos;5&apos;, &apos;3&apos;, &apos;1&apos;]
-</code></pre><h3 id="Zip"><a href="#Zip" class="headerlink" title="Zip"></a>Zip</h3><p>Zip function is used to merge two single elements into a (key, value) tuple.<br>e.g.</p>
-<pre><code>list_keys = [&apos;Country&apos;, &apos;Total&apos;]
-list_values = [[&apos;US&apos;, &apos;SU&apos;], [118, 73]]
-&gt;&gt;&gt; zip(list_keys, list_values)
-[(&apos;Country&apos;, [&apos;US&apos;, &apos;SU&apos;]), (&apos;Total&apos;, [118, 73])]
-</code></pre><p>Convert (key, value) pairs to dict:</p>
-<pre><code>&gt;&gt;&gt; dict(list(zip(list_keys, list_values)))
-{&apos;Country&apos;: [&apos;US&apos;, &apos;SU&apos;], &apos;Total&apos;: [118, 73]}
-</code></pre><h3 id="Generator"><a href="#Generator" class="headerlink" title="Generator:"></a>Generator:</h3><p>Generator will not create complete list in order to save space.<br>e.g. Create a generator:</p>
-<pre><code>&gt;&gt;&gt; g = (x * x for x in range(10))
-&gt;&gt;&gt; g
-&lt;generator object &lt;genexpr&gt; at 0x104feab40&gt;
-</code></pre><p>Visit elements:</p>
-<pre><code>&gt;&gt;&gt; g.next()
-0
-&gt;&gt;&gt; g.next()
-1
-&gt;&gt;&gt; g.next()
-4
-</code></pre><p>Iteration:</p>
-<pre><code>&gt;&gt;&gt; for n in g:
-...     print n
-...
-0
-1
-4
-</code></pre><p><strong>yield</strong> is used to return a value into generator.<br>Convert function into generator:</p>
-<pre><code>&gt;&gt;&gt; def generator():
-...     for i in range(3):
-...         yield i * i
-...
-&gt;&gt;&gt; g = generator()
-&gt;&gt;&gt; g
-&lt;generator object generator at 0x10a1671e0&gt;
-&gt;&gt;&gt; for i in g:
-...     print i
-...
-0
-1
-4
-</code></pre><h3 id="Conditional-operator"><a href="#Conditional-operator" class="headerlink" title="Conditional operator"></a>Conditional operator</h3><p>Condition operator has many forms in python:<br>if-else:</p>
-<pre><code>&gt;&gt;&gt; a = 1 if 1 &gt; 0 else 0
-&gt;&gt;&gt; a
-1
-&gt;&gt;&gt;
-</code></pre><p>list/tuple:</p>
-<pre><code>&gt;&gt;&gt; a = (1, 0)[1 &gt; 0]
-&gt;&gt;&gt; a
-0
-&gt;&gt;&gt;
-</code></pre><p>or: </p>
-<pre><code>&gt;&gt;&gt; a = [1, 0][1 &gt; 0]
-&gt;&gt;&gt; a
-0
-&gt;&gt;&gt;
-</code></pre><p>Notice that True/False represents 1/0 when they are index.</p>
-
+        <p>Pagerank algorithm and its mapreduce implementation.<br><a id="more"></a></p>
+<p>First of all, let’s consider an interesting problem. Everyone knows pagerank and every can craw webpages, why there is not another Google? In other words, what’s the limitation of being the second Google?</p>
+<p>Obviously, the answer is computation ablility. Actually, google has more than 2 million machines locating in all over the world. Its very very powerful machines can store massive data and support computing.</p>
+<p>Although google has a lot of machines to support compute, it still needs many distributed solution, because one machine or server cannot store all of the webpages and compute their importance. So, let us introduce very famous algorithm – <strong>pagerank</strong> first, and then discuss its <strong>mapreduce</strong> implementation.</p>
+<h3 id="Random-Walk"><a href="#Random-Walk" class="headerlink" title="Random Walk"></a>Random Walk</h3><p><a href="https://en.wikipedia.org/wiki/Random_walk" target="_blank" rel="noopener">Random walk</a> is a mathematical object, known as a stochastic or random process, that describes a path that consists of a succession of random steps on some mathematical space such as the integers. Its idea is baesd on Markov Chain. A <a href="https://en.wikipedia.org/wiki/Markov_chain" target="_blank" rel="noopener">Markov chain</a> is a stochastic model describing a sequence of possible events in which the probability of each event depends <strong>only on the state attained in the previous event</strong>.</p>
+<p>Let $ p_i(t) $ be the probability that the walk is in node $ i $ at time $ t $.</p>
+<p>$$<br>p_i(t) = \sum_{m=0} \frac{A_(ij)}{k_j} p_j(t-1)<br>$$</p>
+<p>So, the probability of node $ i $ depends on the degree and probabilities of its neighbors.</p>
+<h3 id="PageRank"><a href="#PageRank" class="headerlink" title="PageRank"></a>PageRank</h3><p>PageRank algorithm is based on the idea of random walk. Let $ p_i $ be a page. $ R(p_i) $ be the PageRank value in terms of importance of page $ p_i $. Let $ d = 0.85 $ be the damping factor. $ N_{in}(p_i)/N_{out}(p_i) $ is the in/out-neighbors of $ p_i $.</p>
+<p>$$<br>R(p_i) = (1 - d) + d \sum_{p_j \in N_{in}(p_i)} \frac{R(p_i)}{|N_{out}(p_i)|}<br>$$</p>
+<h3 id="PageRank-with-MapReduce"><a href="#PageRank-with-MapReduce" class="headerlink" title="PageRank with MapReduce"></a>PageRank with MapReduce</h3><p>As refer to the equation above. The algorithm contains two cycles. The first one is to count the total out degrees of node $ p_j $. The second is to get the sum value of in-neighbors of node $ p_i $.</p>
+<p>Therefore, we can use three mapreduce rounds to get the distributed solution.<br>1) Calculate the first cycle.<br>2) Calculate the second cycle.<br>3) Make a judgement that the algorithm has converged or not.</p>
+<h3 id="Back-soon"><a href="#Back-soon" class="headerlink" title="Back soon!"></a>Back soon!</h3>
       
     </div>
     
@@ -408,8 +354,8 @@ list_values = [[&apos;US&apos;, &apos;SU&apos;], [118, 73]]
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2018/08/29/Graph-Theory/" rel="next" title="Graph Theory">
-                <i class="fa fa-chevron-left"></i> Graph Theory
+              <a href="/blog/2018/09/16/MapReduce/" rel="next" title="MapReduce">
+                <i class="fa fa-chevron-left"></i> MapReduce
               </a>
             
           </div>
@@ -417,10 +363,6 @@ list_values = [[&apos;US&apos;, &apos;SU&apos;], [118, 73]]
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/blog/2018/09/15/Network-Generate-Model-and-Algorithm/" rel="prev" title="Network Generate Model and Algorithm">
-                Network Generate Model and Algorithm <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -557,7 +499,7 @@ list_values = [[&apos;US&apos;, &apos;SU&apos;], [118, 73]]
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sort-lambda-expression"><span class="nav-number">1.</span> <span class="nav-text">Sort() + lambda expression</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zip"><span class="nav-number">2.</span> <span class="nav-text">Zip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generator"><span class="nav-number">3.</span> <span class="nav-text">Generator:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conditional-operator"><span class="nav-number">4.</span> <span class="nav-text">Conditional operator</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Random-Walk"><span class="nav-number">1.</span> <span class="nav-text">Random Walk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PageRank"><span class="nav-number">2.</span> <span class="nav-text">PageRank</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PageRank-with-MapReduce"><span class="nav-number">3.</span> <span class="nav-text">PageRank with MapReduce</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Back-soon"><span class="nav-number">4.</span> <span class="nav-text">Back soon!</span></a></li></ol></div>
             
 
           </div>
