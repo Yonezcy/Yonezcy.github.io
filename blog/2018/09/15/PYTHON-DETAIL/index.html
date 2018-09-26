@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="Yonezcy">
 <meta property="og:description" content="This blog reveals some details of vital importance in python coding.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-15T08:56:53.000Z">
+<meta property="og:updated_time" content="2018-09-26T10:01:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PYTHON DETAIL">
 <meta name="twitter:description" content="This blog reveals some details of vital importance in python coding.">
@@ -321,69 +321,52 @@
         <p>This blog reveals some details of vital importance in python coding.<br><a id="more"></a></p>
 <h3 id="Sort-lambda-expression"><a href="#Sort-lambda-expression" class="headerlink" title="Sort() + lambda expression"></a>Sort() + lambda expression</h3><p>Lambda expression can be used to be the parameter ‘cmp’ of sort() to determine the way of sort.</p>
 <p>Default(Ascending order): </p>
-<pre><code>list.sort() = list.sort(cmp = lambda x, y: cmp(x, y))
-</code></pre><p>Descending order:</p>
-<pre><code>list.sort(cmp = lambda x, y: cmp(y, x))
-</code></pre><p>e.g. Given a list a = [‘1’, ‘9’, ‘3’, ‘5’, ‘7’], converge list element and return the biggest one.<br>Solution as follows:</p>
-<pre><code>a.sort(cmp = lambda x, y: cmp(y+x, x+y))
-&gt;&gt;&gt; a
-[&apos;9&apos;, &apos;7&apos;, &apos;5&apos;, &apos;3&apos;, &apos;1&apos;]
-</code></pre><h3 id="Zip"><a href="#Zip" class="headerlink" title="Zip"></a>Zip</h3><p>Zip function is used to merge two single elements into a (key, value) tuple.<br>e.g.</p>
-<pre><code>list_keys = [&apos;Country&apos;, &apos;Total&apos;]
-list_values = [[&apos;US&apos;, &apos;SU&apos;], [118, 73]]
-&gt;&gt;&gt; zip(list_keys, list_values)
-[(&apos;Country&apos;, [&apos;US&apos;, &apos;SU&apos;]), (&apos;Total&apos;, [118, 73])]
-</code></pre><p>Convert (key, value) pairs to dict:</p>
-<pre><code>&gt;&gt;&gt; dict(list(zip(list_keys, list_values)))
-{&apos;Country&apos;: [&apos;US&apos;, &apos;SU&apos;], &apos;Total&apos;: [118, 73]}
-</code></pre><h3 id="Generator"><a href="#Generator" class="headerlink" title="Generator:"></a>Generator:</h3><p>Generator will not create complete list in order to save space.<br>e.g. Create a generator:</p>
-<pre><code>&gt;&gt;&gt; g = (x * x for x in range(10))
-&gt;&gt;&gt; g
-&lt;generator object &lt;genexpr&gt; at 0x104feab40&gt;
-</code></pre><p>Visit elements:</p>
-<pre><code>&gt;&gt;&gt; g.next()
-0
-&gt;&gt;&gt; g.next()
-1
-&gt;&gt;&gt; g.next()
-4
-</code></pre><p>Iteration:</p>
-<pre><code>&gt;&gt;&gt; for n in g:
-...     print n
-...
-0
-1
-4
-</code></pre><p><strong>yield</strong> is used to return a value into generator.<br>Convert function into generator:</p>
-<pre><code>&gt;&gt;&gt; def generator():
-...     for i in range(3):
-...         yield i * i
-...
-&gt;&gt;&gt; g = generator()
-&gt;&gt;&gt; g
-&lt;generator object generator at 0x10a1671e0&gt;
-&gt;&gt;&gt; for i in g:
-...     print i
-...
-0
-1
-4
-</code></pre><h3 id="Conditional-operator"><a href="#Conditional-operator" class="headerlink" title="Conditional operator"></a>Conditional operator</h3><p>Condition operator has many forms in python:<br>if-else:</p>
-<pre><code>&gt;&gt;&gt; a = 1 if 1 &gt; 0 else 0
-&gt;&gt;&gt; a
-1
-&gt;&gt;&gt;
-</code></pre><p>list/tuple:</p>
-<pre><code>&gt;&gt;&gt; a = (1, 0)[1 &gt; 0]
-&gt;&gt;&gt; a
-0
-&gt;&gt;&gt;
-</code></pre><p>or: </p>
-<pre><code>&gt;&gt;&gt; a = [1, 0][1 &gt; 0]
-&gt;&gt;&gt; a
-0
-&gt;&gt;&gt;
-</code></pre><p>Notice that True/False represents 1/0 when they are index.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list.sort() = list.sort(cmp = <span class="keyword">lambda</span> x, y: cmp(x, y))</span><br></pre></td></tr></table></figure>
+<p>Descending order:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list.sort(cmp = <span class="keyword">lambda</span> x, y: cmp(y, x))</span><br></pre></td></tr></table></figure>
+<p>e.g. Given a list a = [‘1’, ‘9’, ‘3’, ‘5’, ‘7’], converge list element and return the biggest one.<br>Solution as follows:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.sort(cmp = <span class="keyword">lambda</span> x, y: cmp(y+x, x+y))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">[<span class="string">'9'</span>, <span class="string">'7'</span>, <span class="string">'5'</span>, <span class="string">'3'</span>, <span class="string">'1'</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="Zip"><a href="#Zip" class="headerlink" title="Zip"></a>Zip</h3><p>Zip function is used to merge two single elements into a (key, value) tuple.<br>e.g.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list_keys = [<span class="string">'Country'</span>, <span class="string">'Total'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list_values = [[<span class="string">'US'</span>, <span class="string">'SU'</span>], [<span class="number">118</span>, <span class="number">73</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>zip(list_keys, list_values)</span><br><span class="line">[(<span class="string">'Country'</span>, [<span class="string">'US'</span>, <span class="string">'SU'</span>]), (<span class="string">'Total'</span>, [<span class="number">118</span>, <span class="number">73</span>])]</span><br></pre></td></tr></table></figure>
+<p>Convert (key, value) pairs to dict:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>dict(list(zip(list_keys, list_values)))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;<span class="string">'Country'</span>: [<span class="string">'US'</span>, <span class="string">'SU'</span>], <span class="string">'Total'</span>: [<span class="number">118</span>, <span class="number">73</span>]&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Generator"><a href="#Generator" class="headerlink" title="Generator:"></a>Generator:</h3><p>Generator will not create complete list in order to save space.<br>e.g. Create a generator:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>g = (x * x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>g</span><br><span class="line">&lt;generator object &lt;genexpr&gt; at <span class="number">0x104feab40</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>Visit elements:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>g.next()</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>g.next()</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>g.next()</span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
+<p>Iteration:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> n <span class="keyword">in</span> g:</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">print</span> n</span><br><span class="line">...</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
+<p><strong>yield</strong> is used to return a value into generator.<br>Convert function into generator:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">generator</span><span class="params">()</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line"><span class="meta">... </span>        <span class="keyword">yield</span> i * i</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>g = generator()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>g</span><br><span class="line">&lt;generator object generator at <span class="number">0x10a1671e0</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> i <span class="keyword">in</span> g:</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>...     <span class="keyword">print</span> i</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">4</span></span><br></pre></td></tr></table></figure>
+<h3 id="Conditional-operator"><a href="#Conditional-operator" class="headerlink" title="Conditional operator"></a>Conditional operator</h3><p>Condition operator has many forms in python:<br>If-else:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="number">1</span> <span class="keyword">if</span> <span class="number">1</span> &gt; <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>List/tuple:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = (<span class="number">1</span>, <span class="number">0</span>)[<span class="number">1</span> &gt; <span class="number">0</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line"><span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>Orr:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = [<span class="number">1</span>, <span class="number">0</span>][<span class="number">1</span> &gt; <span class="number">0</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line"><span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>Notice that True/False represents 1/0 when they are index.</p>
+<h3 id="List-vs-np-array"><a href="#List-vs-np-array" class="headerlink" title="List vs np.array"></a>List vs np.array</h3><p>List can contain multiple elements from different categories. But np.array can only contain homogeneous elements.</p>
+<p>So for lists we have:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list = [<span class="number">1</span>, <span class="string">'z'</span>, <span class="keyword">True</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list</span><br><span class="line">[<span class="number">1</span>, <span class="string">'z'</span>, <span class="keyword">True</span>]</span><br></pre></td></tr></table></figure>
+<p>But for np.array:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.array([<span class="number">1</span>, <span class="string">'z'</span>, <span class="keyword">True</span>])</span><br><span class="line">array([<span class="string">'1'</span>, <span class="string">'z'</span>, <span class="string">'True'</span>], dtype=<span class="string">'|S21'</span>)</span><br></pre></td></tr></table></figure>
+<p>It turns out different categorical elements will be transformed into one specific category. In here, they are transformed to string. </p>
+<h3 id="Nested-function"><a href="#Nested-function" class="headerlink" title="Nested function"></a>Nested function</h3><p>The nested function is a very useful tool to achieve some goals. For instance, suppose we have a function that $ y = x mod 2 + 5$, the mission is to pass three x to function and return y. If we are not allowed  to use flexible arguments(mention later), how can we do it? The answer is calculating them respectively. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mod2plus5</span><span class="params">(x1, x2, x3)</span>:</span></span><br><span class="line">    y1 = x1 % <span class="number">2</span> + <span class="number">5</span></span><br><span class="line">    y2 = x2 % <span class="number">2</span> + <span class="number">5</span></span><br><span class="line">    y3 = x3 % <span class="number">2</span> + <span class="number">5</span></span><br><span class="line">    <span class="keyword">return</span> (y1, y2, y3)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mod2plus5(<span class="number">4</span>, <span class="number">15</span>, <span class="number">25</span>)</span><br><span class="line">(<span class="number">5</span>, <span class="number">6</span>, <span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+<p>Although we have achieved our goal, it is not concisely at all, right? So, that’s the chance to introduce <strong>nested function</strong>. Nested function is a special function and we can call it as inner function. Intuitively, we can understand it as a subfunction within a parent function. Anyway, the second way of completing our mission is to use it.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mod2plus5</span><span class="params">(x1, x2, x3)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">(x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> x % <span class="number">2</span> + <span class="number">5</span></span><br><span class="line">    <span class="keyword">return</span> (inner(x1), inner(x2), inner(x3))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>mod2plus5(<span class="number">4</span>, <span class="number">15</span>, <span class="number">25</span>)</span><br><span class="line">(<span class="number">5</span>, <span class="number">6</span>, <span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+<p>As you can see, we achieved our goal elegantly and efficiently, right? Actually, there is a third way to achieve it called <strong>flexible arguments</strong>, similarly efficient at all. We will discuss it later.</p>
+<p>You may have a question that if I have two variables with same name in different scope of customized functions, how does python intepreter recognize and use them? So, let us discuss python scope.</p>
+<p>Take a look at these codes.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">()</span>:</span></span><br><span class="line">    n = <span class="number">1</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></span><br><span class="line">        n = <span class="number">2</span></span><br><span class="line">        print(n)</span><br><span class="line">    inner()</span><br><span class="line">    print(n)</span><br></pre></td></tr></table></figure>
+<p>What’s the input? Interesting question! Right? The key point of this problem are the second n and the second ‘print’. In fact, the output is(can be verified by yourself):</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>outer()</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>As you can see, two ‘print’ keywords print their own variable n in their scope respectively. In other words, the variable n in inner scope makes no influence on enclosing scope. So, another question is, if we want inner variables can be detected outside, what should we do?</p>
+<p>The answer is quite simple – using <strong>nonlocal</strong> keyword.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">()</span>:</span></span><br><span class="line">    n = <span class="number">1</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></span><br><span class="line">    	<span class="keyword">nonlocal</span> n</span><br><span class="line">        n = <span class="number">2</span></span><br><span class="line">        print(n)</span><br><span class="line">    inner()</span><br><span class="line">    print(n)</span><br></pre></td></tr></table></figure>
+<p>Let’s check our output:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; outer()</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>To summarize, python’s name references search at most 4 scopes, the <strong><em>local scope</em></strong>, those of <strong><em>enclosing functions</em></strong>(if any), <strong><em>global</em></strong>, <strong><em>built-in</em></strong>. That’s called <strong><em>LEGB</em></strong> formula. Built-in scope means python’s built-in repository, such as ‘print’, ‘def’ and so on.</p>
 
       
     </div>
@@ -557,7 +540,7 @@ list_values = [[&apos;US&apos;, &apos;SU&apos;], [118, 73]]
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sort-lambda-expression"><span class="nav-number">1.</span> <span class="nav-text">Sort() + lambda expression</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zip"><span class="nav-number">2.</span> <span class="nav-text">Zip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generator"><span class="nav-number">3.</span> <span class="nav-text">Generator:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conditional-operator"><span class="nav-number">4.</span> <span class="nav-text">Conditional operator</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sort-lambda-expression"><span class="nav-number">1.</span> <span class="nav-text">Sort() + lambda expression</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zip"><span class="nav-number">2.</span> <span class="nav-text">Zip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generator"><span class="nav-number">3.</span> <span class="nav-text">Generator:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conditional-operator"><span class="nav-number">4.</span> <span class="nav-text">Conditional operator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#List-vs-np-array"><span class="nav-number">5.</span> <span class="nav-text">List vs np.array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nested-function"><span class="nav-number">6.</span> <span class="nav-text">Nested function</span></a></li></ol></div>
             
 
           </div>
