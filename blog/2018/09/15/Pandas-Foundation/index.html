@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="Yonezcy">
 <meta property="og:description" content="Pandas is a significant tool for data science, especially in data processing unit. This blog aims to introduce some foundations of Pandas.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-15T12:37:47.000Z">
+<meta property="og:updated_time" content="2018-10-07T12:33:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pandas Foundation">
 <meta name="twitter:description" content="Pandas is a significant tool for data science, especially in data processing unit. This blog aims to introduce some foundations of Pandas.">
@@ -320,9 +320,8 @@
       
         <p>Pandas is a significant tool for data science, especially in data processing unit. This blog aims to introduce some foundations of Pandas.<br><a id="more"></a></p>
 <h2 id="DataFrame"><a href="#DataFrame" class="headerlink" title="DataFrame"></a>DataFrame</h2><h3 id="Create-DataFrame"><a href="#Create-DataFrame" class="headerlink" title="Create DataFrame"></a>Create DataFrame</h3><p>Create a dataframe from CSV files:</p>
-<pre><code>&gt;&gt;&gt; import pandas as pd
-&gt;&gt;&gt; users = pd.readcsv(&apos;xxx.csv&apos;, index_col = 0)
-</code></pre><p>From dictionary:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>users = pd.readcsv(<span class="string">'xxx.csv'</span>, index_col = <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>From dictionary:</p>
 <pre><code>&gt;&gt;&gt; data = {&apos;weekday&apos;: [&apos;sum&apos;, &apos;mon&apos;], &apos;city&apos;: [&apos;Austin&apos;, &apos;Dallas&apos;]}
 &gt;&gt;&gt; users = pd.DataFrame(data)
 &gt;&gt;&gt; users = pd.DataFrame(data)
@@ -343,18 +342,13 @@
 &gt;&gt;&gt; type(city)
 &lt;class &apos;pandas.core.series.Series&apos;&gt;
 </code></pre><p>column.index returns series index</p>
-<pre><code>&gt;&gt;&gt; city.index
-RangeIndex(start=0, stop=2, step=1)
-</code></pre><h3 id="Convert-to-Numpy"><a href="#Convert-to-Numpy" class="headerlink" title="Convert to Numpy"></a>Convert to Numpy</h3><pre><code>array = df.values 
-</code></pre><h3 id="Assign-names-to-columns"><a href="#Assign-names-to-columns" class="headerlink" title="Assign names to columns"></a>Assign names to columns</h3><pre><code>list = [&apos;year&apos;, &apos;month&apos;, &apos;day&apos;]
-df.columns = list
-</code></pre><h3 id="Writing-Files"><a href="#Writing-Files" class="headerlink" title="Writing Files"></a>Writing Files</h3><p>Writing CSV:</p>
-<pre><code>out_csv = &apos;data.csv&apos;
-data.to_csv(out_csv)
-</code></pre><p>Writing EXCEL:</p>
-<pre><code>out_xlsx = &apos;data.xlsx&apos;
-data.to_excel(out_xlsx)
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>city.index</span><br><span class="line">RangeIndex(start=<span class="number">0</span>, stop=<span class="number">2</span>, step=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="Convert-to-Numpy"><a href="#Convert-to-Numpy" class="headerlink" title="Convert to Numpy"></a>Convert to Numpy</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array = df.values</span><br></pre></td></tr></table></figure>
+<h3 id="Assign-names-to-columns"><a href="#Assign-names-to-columns" class="headerlink" title="Assign names to columns"></a>Assign names to columns</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list = [<span class="string">'year'</span>, <span class="string">'month'</span>, <span class="string">'day'</span>]</span><br><span class="line">df.columns = list</span><br></pre></td></tr></table></figure>
+<h3 id="Writing-Files"><a href="#Writing-Files" class="headerlink" title="Writing Files"></a>Writing Files</h3><p>Writing CSV:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">out_csv = <span class="string">'data.csv'</span></span><br><span class="line">data.to_csv(out_csv)</span><br></pre></td></tr></table></figure>
+<p>Writing EXCEL:<br>​<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">out_xlsx = <span class="string">'data.xlsx'</span></span><br><span class="line">data.to_excel(out_xlsx)</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     

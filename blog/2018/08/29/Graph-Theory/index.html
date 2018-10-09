@@ -106,7 +106,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/Undirected_Graph.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/Adjacency_matrix.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/Ajacency_list.png">
-<meta property="og:updated_time" content="2018-09-19T09:25:35.000Z">
+<meta property="og:updated_time" content="2018-10-07T12:34:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Graph Theory">
 <meta name="twitter:description" content="Introduce some basic concepts and algorithms about graph theory.">
@@ -329,222 +329,18 @@
 <h4 id="2-Adjacency-List"><a href="#2-Adjacency-List" class="headerlink" title="2. Adjacency List"></a>2. Adjacency List</h4><p><img src="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/Ajacency_list.png" width="75%" height="75%"></p>
 <h4 id="3-Comparison"><a href="#3-Comparison" class="headerlink" title="3. Comparison"></a>3. Comparison</h4><p>The adjacency matrix saves search time and the adjacency list saves space.</p>
 <h3 id="Traversal-Graph-Search"><a href="#Traversal-Graph-Search" class="headerlink" title="Traversal(Graph Search)"></a>Traversal(Graph Search)</h3><h4 id="1-Depth-First-Search"><a href="#1-Depth-First-Search" class="headerlink" title="1. Depth First Search"></a>1. Depth First Search</h4><p>1] Visit vertex v.<br>2] Choose an adjacency vertex to DFS.<br>3] Repeart step #1,2 until all vectices are visited.</p>
-<pre><code>def DFS(v):
-  visit[v] = 1
-  for w in range(n):
-    if graph[v][w] == 1 and not visit[w]:
-      DFS(w)
-</code></pre><h4 id="2-Breadth-First-Search"><a href="#2-Breadth-First-Search" class="headerlink" title="2. Breadth First Search"></a>2. Breadth First Search</h4><p>1] Visit vertex v.<br>2] Visit all adjacency vertices of v, and put them in the queue Q.<br>3] Visit v_news in V_new.<br>4] For v_new in Q, repeat step #2,3 until queue is null.</p>
-<pre><code>def BFS(v):
-  visit[v] = 1
-  queue = Queue.Queue()
-  queue.put(v)
-  while not queue.empty():
-    queue.get()
-    for w in range(n):
-      if graph[w][v] == 1 and not visit[w]:
-        visit[w] = 1
-        queue.put(w)
-</code></pre><h3 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h3><h4 id="1-Shortest-Path-Algorithm"><a href="#1-Shortest-Path-Algorithm" class="headerlink" title="1. Shortest Path Algorithm"></a>1. Shortest Path Algorithm</h4><p><strong><em>1) Floyd</em></strong><br>Floyd algorithm is used to calculate the shortest distance between two auxiliary vertices. The step is:<br>1] Initialize adjacency matrix and distances.<br>2] For vertex i, check whether exists vertex k to set up Dis(i,k) + Dis(k,j) &lt; Dis(i,j). If so, update Dis(i,j) = Dis(i,k) + Dis(k,j).<br>3] Repeat 2] until all vertices have been went through.</p>
-<pre><code>#include &lt;stdio.h&gt;
-int main() {
-    int e[10][10]; // Adjacency Matrix.
-    int k, i, j, n, m, t1, t2, t3;
-    int inf = 99999999; // Infinity.
-    // Input n, m, represnt number of vertices and number of edges respectively.
-    scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
-
-    // Initialization.
-    for (i = 1; i &lt;= n; i++)
-        for (j = 1; j &lt;= n; j++)
-            if (i == j) e[i][j] = 0;
-              else e[i][j] = inf;
-
-    // Input weight of edges.
-    for (i = 1; i &lt;= m; i++) {
-        scanf(&quot;%d %d %d&quot;, &amp;t1, &amp;t2, &amp;t3);
-        e[t1][t2] = t3;
-    }
-
-    // Floyd.
-    for (k = 1; k &lt;= n; k++)
-        for (i = 1; i &lt;= n; i++)
-            for (j = 1; j &lt;= n; j++)
-                if (e[i][j] &gt; e[i][k] + e[k][j])
-                    e[i][j] = e[i][k] + e[k][j];
-
-    // Output results.
-    for (i = 1; i &lt;= n; i++) {
-         for (j = 1; j &lt;= n; j++) {
-            printf(&quot;%10d&quot;, e[i][j]);
-        }
-        printf(&quot;\n&quot;);
-    }
-    return 0;
-}
-</code></pre><p><strong><em>2) Dijkstra</em></strong><br>Dijkstra algorithm is used to calculate the shortest single source path.<br>The step is:<br>1] Initialize adjacency matrix and shortest distance array(between first vertex and others).<br>2] Initialize two sets U and V, represent shortest path vertex collection/remain vertex. First, add the first vertex to U. Others have been put to V.<br>3] Compare the distance between the first vertex and vertices belong to set V to find the shortest one. Then add corresponding vertex to U.<br>4] If dis[v] &gt; dis[u] + e[u][v], update dis[v] = dis[u] + e[u][v].<br>5] Repeat 3] 4] until all vertices are added to U namely none nodes in V.</p>
-<pre><code>#include &lt;stdio.h&gt;
-int main() {
-    int e[10][10], dis[10], book[10] // Adjacency matrix，shortest distance, mark array.
-    int i, j, n, m, t1, t2, t3, u, v, min;
-    int inf = 99999999999; // Infinity.
-    // Input n and m as number of vertices and edges respectively.
-    scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
-
-    // Initialize adjacency matrix.
-    for (i = 1; i &lt;= n; i++)
-        for (j = 1; j &lt;= n; j++)
-            if (i == j) e[i][j] = 0;
-              else e[i][j] = inf;
-
-    // Input weights of edges.
-    for (i = 1; i &lt;= m; i++) {
-        scanf(&quot;%d %d %d&quot;, &amp;t1, &amp;t2, &amp;t3);
-        e[t1][t2] = t3;
-    }
-
-    // Initialize shortest distance array(between the first one and others).
-    for (i = 1; i &lt;= n; i++)
-        dis[i] = e[1][i];
-
-    // Initialize mark array.(be able to replace book[i] with dis[i]=0)
-    for (i = 1 ; i &lt;= n; i++)
-        book[i] = 0;
-    book[1] = 1;
-
-    // Dijkstra.
-    for (i = 1; i &lt;= n-1; i++) {
-        min = inf;
-        // Find the distances between the first vertex and others.
-        for (j = 1; j &lt;= n; j++) {
-            if (book[j] == 0 &amp;&amp; dis[j] &lt; min) {
-                min = dis[j];
-                u = j;
-            }
-        }
-        book[u] = 1;
-        // Update distances.
-        for (v = 1; v &lt;= n; v++) {
-            if (e[u][v] &lt; inf) {
-                if (dis[v] &gt; dis[u] + e[u][v])
-                    dis[v] = dis[u] + e[u][v];
-            }
-        }
-    }
-    // Output results.
-    for (i = 1; i &lt;= n; i++)
-        printf(&quot;%d &quot;, dis[i]);
-    return 0;
-}
-</code></pre><h4 id="2-Minimum-Spanning-Trees"><a href="#2-Minimum-Spanning-Trees" class="headerlink" title="2. Minimum Spanning Trees"></a>2. Minimum Spanning Trees</h4><p><strong><em>1) Prime</em></strong><br>Prime solves the Minimum Spanning Tree problem of weight connected graph. The step is:<br>1] Initialize G = &lt;V, E&gt;, and set U contains vertices of MST. So (V-U) includes other vertices. And set T stores edges of MST. First add a random vertex u to U.<br>2] Choose a vertex u of U and sort the distances between u and other alters. Choose the shortest one (u, v). Add v to U and add (u, v) to T.<br>3] Repeat 2] until U = V.</p>
-<pre><code>#include &lt;stdio.h&gt;
-int main() {
-    int e[10][10]; // Adjacency Matrix.
-    int prime[10], weights[10] // Prime result, weight of any other edges.
-    int k, i, j, n, m, t1, t2, t3, min, index=0;
-    int inf = 99999999; // Infinity.
-    // Input n, m, represnt number of vertices and number of edges respectively.
-    scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
-
-    // Initialization.
-    for (i = 1; i &lt;= n; i++)
-        for (j = 1; j &lt;= n; j++)
-            if (i == j) e[i][j] = 0;
-              else e[i][j] = inf;
-
-    // Input weight of edges.
-    for (i = 1; i &lt;= m; i++) {
-        scanf(&quot;%d %d %d&quot;, &amp;t1, &amp;t2, &amp;t3);
-        e[t1][t2] = t3;
-    }
-
-    // Weights between MST and other vertices.
-    for (i = 1; i &lt;= n; i++) {
-        weights[i] = e[1][i];
-    }
-
-    // Prime.
-    for (i = 1, i &lt;= n; i++) {
-        j = 1, k = 1;
-        min = inf;
-        while (j &lt;= n) {
-            if (weights[j] != 0 &amp;&amp; weights[j] &lt; min) {
-                min = weights[j];
-                k = j;
-            }
-            j++;
-        }
-        // Add kth vertex into MST set.
-        prime[index++] = weights[k];
-        weights[k] = 0;
-        // Update weights.
-        for (j = 1; j &lt;= n; j++) {
-            if (weights[j] != 0 &amp;&amp; e[k][j] &lt; weights[j])
-                weights[j] = e[k][j];
-        } 
-    }
-
-    // Output results.
-    for (i = 0; i &lt; n; i++) {
-        totalWeight += primes[i];
-    }
-    printf(&quot;totalWeight = %d&quot;, totalWeight);
-    return 0;
-}
-</code></pre><p><strong><em>2) Kruskal</em></strong><br>Do the same thing as Prime.<br>1] Sort all the edges in non-decreasing order of their weight.<br>2] Pick the smallest edge. Check if it forms a cycle with the spanning tree formed so far. If cycle is not formed, include this edge. Else, discard it.<br>3] Repeat step#2 until there are (V-1) edges in the spanning tree.</p>
-<pre><code>#include &lt;stdio.h&gt;
-
-// Adjacency matrix.
-typedef struct _graph {
-    char vexs[MAX];       // vertex
-    int vexnum;           // number of vertices
-    int edgnum;           // edges
-    int matrix[MAX][MAX]; // adjacency matrix
-}Graph, *PGraph;
-
-// Edge struct.
-typedef struct _EdgeData {
-    char start; // start of edge
-    char end;   // end of edge
-    int weight; // weight of edge
-}EData;
-
-void kruskal(Graph G) {
-    int i,m,n,p1,p2;
-    int length;
-    int index = 0;          // index of rets
-    int vends[MAX]={0};     // stores the ends of each vertex of MST
-    EData rets[MAX];        // result array, stores edges
-    EData *edges;           // all edges
-
-    // Get all the edges of graph.
-    edges = get_edges(G);
-    // Sort in descending order of weight.
-    sorted_edges(edges, G.edgnum);
-
-    for (i = 0; i &lt; G.edgnum; i++) {
-        p1 = get_position(G, edges[i].start);   // Get the number of start node of ith edge
-        p2 = get_position(G, edges[i].end);     // Get the number of end node of ith edge
-        m = get_end(vends, p1);                 // get end of p1
-        n = get_end(vends, p2);                 // get end of p2
-        // if m != n，means there is no cycle.
-        if (m != n) {
-            vends[m] = n;                       // set [end of m] = n
-            rets[index++] = edges[i];           // store result
-        }
-    }
-    free(edges);
-
-    // Count and print.
-    length = 0;
-    for (i = 0; i &lt; index; i++)
-        length += rets[i].weight;
-    printf(&quot;Kruskal=%d: &quot;, length);
-    for (i = 0; i &lt; index; i++)
-        printf(&quot;(%c, %c) &quot;, rets[i].start, rets[i].end);
-    printf(&quot;\n&quot;);
-}
-</code></pre><h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">DFS</span><span class="params">(v)</span>:</span></span><br><span class="line">  visit[v] = <span class="number">1</span></span><br><span class="line">  <span class="keyword">for</span> w <span class="keyword">in</span> range(n):</span><br><span class="line">    <span class="keyword">if</span> graph[v][w] == <span class="number">1</span> <span class="keyword">and</span> <span class="keyword">not</span> visit[w]:</span><br><span class="line">      DFS(w)</span><br></pre></td></tr></table></figure>
+<h4 id="2-Breadth-First-Search"><a href="#2-Breadth-First-Search" class="headerlink" title="2. Breadth First Search"></a>2. Breadth First Search</h4><p>1] Visit vertex v.<br>2] Visit all adjacency vertices of v, and put them in the queue Q.<br>3] Visit v_news in V_new.<br>4] For v_new in Q, repeat step #2,3 until queue is null.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">BFS</span><span class="params">(v)</span>:</span></span><br><span class="line">  visit[v] = <span class="number">1</span></span><br><span class="line">  queue = Queue.Queue()</span><br><span class="line">  queue.put(v)</span><br><span class="line">  <span class="keyword">while</span> <span class="keyword">not</span> queue.empty():</span><br><span class="line">    queue.get()</span><br><span class="line">    <span class="keyword">for</span> w <span class="keyword">in</span> range(n):</span><br><span class="line">      <span class="keyword">if</span> graph[w][v] == <span class="number">1</span> <span class="keyword">and</span> <span class="keyword">not</span> visit[w]:</span><br><span class="line">        visit[w] = <span class="number">1</span></span><br><span class="line">        queue.put(w)</span><br></pre></td></tr></table></figure>
+<h3 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h3><h4 id="1-Shortest-Path-Algorithm"><a href="#1-Shortest-Path-Algorithm" class="headerlink" title="1. Shortest Path Algorithm"></a>1. Shortest Path Algorithm</h4><p><strong><em>1) Floyd</em></strong><br>Floyd algorithm is used to calculate the shortest distance between two auxiliary vertices. The step is:<br>1] Initialize adjacency matrix and distances.<br>2] For vertex i, check whether exists vertex k to set up Dis(i,k) + Dis(k,j) &lt; Dis(i,j). If so, update Dis(i,j) = Dis(i,k) + Dis(k,j).<br>3] Repeat 2] until all vertices have been went through.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> e[<span class="number">10</span>][<span class="number">10</span>]; <span class="comment">// Adjacency Matrix.</span></span><br><span class="line">    <span class="keyword">int</span> k, i, j, n, m, t1, t2, t3;</span><br><span class="line">    <span class="keyword">int</span> inf = <span class="number">99999999</span>; <span class="comment">// Infinity.</span></span><br><span class="line">    <span class="comment">// Input n, m, represnt number of vertices and number of edges respectively.</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;m);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Initialization.</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">            <span class="keyword">if</span> (i == j) e[i][j] = <span class="number">0</span>;</span><br><span class="line">              <span class="keyword">else</span> e[i][j] = inf;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Input weight of edges.</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= m; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>, &amp;t1, &amp;t2, &amp;t3);</span><br><span class="line">        e[t1][t2] = t3;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Floyd.</span></span><br><span class="line">    <span class="keyword">for</span> (k = <span class="number">1</span>; k &lt;= n; k++)</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">            <span class="keyword">for</span> (j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">                <span class="keyword">if</span> (e[i][j] &gt; e[i][k] + e[k][j])</span><br><span class="line">                    e[i][j] = e[i][k] + e[k][j];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Output results.</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">     	<span class="keyword">for</span> (j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%10d"</span>, e[i][j]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><em>2) Dijkstra</em></strong><br>Dijkstra algorithm is used to calculate the shortest single source path.<br>The step is:<br>1] Initialize adjacency matrix and shortest distance array(between first vertex and others).<br>2] Initialize two sets U and V, represent shortest path vertex collection/remain vertex. First, add the first vertex to U. Others have been put to V.<br>3] Compare the distance between the first vertex and vertices belong to set V to find the shortest one. Then add corresponding vertex to U.<br>4] If dis[v] &gt; dis[u] + e[u][v], update dis[v] = dis[u] + e[u][v].<br>5] Repeat 3] 4] until all vertices are added to U namely none nodes in V.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> e[<span class="number">10</span>][<span class="number">10</span>], dis[<span class="number">10</span>], book[<span class="number">10</span>] <span class="comment">// Adjacency matrix，shortest distance, mark array.</span></span><br><span class="line">    <span class="keyword">int</span> i, j, n, m, t1, t2, t3, u, v, min;</span><br><span class="line">    <span class="keyword">int</span> inf = <span class="number">99999999999</span>; <span class="comment">// Infinity.</span></span><br><span class="line">    <span class="comment">// Input n and m as number of vertices and edges respectively.</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;m);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Initialize adjacency matrix.</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">            <span class="keyword">if</span> (i == j) e[i][j] = <span class="number">0</span>;</span><br><span class="line">              <span class="keyword">else</span> e[i][j] = inf;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Input weights of edges.</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= m; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>, &amp;t1, &amp;t2, &amp;t3);</span><br><span class="line">        e[t1][t2] = t3;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Initialize shortest distance array(between the first one and others).</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        dis[i] = e[<span class="number">1</span>][i];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Initialize mark array.(be able to replace book[i] with dis[i]=0)</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span> ; i &lt;= n; i++)</span><br><span class="line">        book[i] = <span class="number">0</span>;</span><br><span class="line">    book[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Dijkstra.</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n<span class="number">-1</span>; i++) &#123;</span><br><span class="line">        min = inf;</span><br><span class="line">        <span class="comment">// Find the distances between the first vertex and others.</span></span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (book[j] == <span class="number">0</span> &amp;&amp; dis[j] &lt; min) &#123;</span><br><span class="line">                min = dis[j];</span><br><span class="line">                u = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        book[u] = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// Update distances.</span></span><br><span class="line">        <span class="keyword">for</span> (v = <span class="number">1</span>; v &lt;= n; v++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (e[u][v] &lt; inf) &#123;</span><br><span class="line">                <span class="keyword">if</span> (dis[v] &gt; dis[u] + e[u][v])</span><br><span class="line">                    dis[v] = dis[u] + e[u][v];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Output results.</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>, dis[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-Minimum-Spanning-Trees"><a href="#2-Minimum-Spanning-Trees" class="headerlink" title="2. Minimum Spanning Trees"></a>2. Minimum Spanning Trees</h4><p><strong><em>1) Prime</em></strong><br>Prime solves the Minimum Spanning Tree problem of weight connected graph. The step is:<br>1] Initialize G = &lt;V, E&gt;, and set U contains vertices of MST. So (V-U) includes other vertices. And set T stores edges of MST. First add a random vertex u to U.<br>2] Choose a vertex u of U and sort the distances between u and other alters. Choose the shortest one (u, v). Add v to U and add (u, v) to T.<br>3] Repeat 2] until U = V.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> e[<span class="number">10</span>][<span class="number">10</span>]; <span class="comment">// Adjacency Matrix.</span></span><br><span class="line">    <span class="keyword">int</span> prime[<span class="number">10</span>], weights[<span class="number">10</span>] <span class="comment">// Prime result, weight of any other edges.</span></span><br><span class="line">    <span class="keyword">int</span> k, i, j, n, m, t1, t2, t3, min, index=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> inf = <span class="number">99999999</span>; <span class="comment">// Infinity.</span></span><br><span class="line">    <span class="comment">// Input n, m, represnt number of vertices and number of edges respectively.</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;m);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Initialization.</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">            <span class="keyword">if</span> (i == j) e[i][j] = <span class="number">0</span>;</span><br><span class="line">              <span class="keyword">else</span> e[i][j] = inf;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Input weight of edges.</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= m; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>, &amp;t1, &amp;t2, &amp;t3);</span><br><span class="line">        e[t1][t2] = t3;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Weights between MST and other vertices.</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        weights[i] = e[<span class="number">1</span>][i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Prime.</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>, i &lt;= n; i++) &#123;</span><br><span class="line">        j = <span class="number">1</span>, k = <span class="number">1</span>;</span><br><span class="line">        min = inf;</span><br><span class="line">        <span class="keyword">while</span> (j &lt;= n) &#123;</span><br><span class="line">            <span class="keyword">if</span> (weights[j] != <span class="number">0</span> &amp;&amp; weights[j] &lt; min) &#123;</span><br><span class="line">                min = weights[j];</span><br><span class="line">                k = j;</span><br><span class="line">            &#125;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// Add kth vertex into MST set.</span></span><br><span class="line">        prime[index++] = weights[k];</span><br><span class="line">        weights[k] = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// Update weights.</span></span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (weights[j] != <span class="number">0</span> &amp;&amp; e[k][j] &lt; weights[j])</span><br><span class="line">                weights[j] = e[k][j];</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Output results.</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        totalWeight += primes[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"totalWeight = %d"</span>, totalWeight);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><em>2) Kruskal</em></strong><br>Do the same thing as Prime.<br>1] Sort all the edges in non-decreasing order of their weight.<br>2] Pick the smallest edge. Check if it forms a cycle with the spanning tree formed so far. If cycle is not formed, include this edge. Else, discard it.<br>3] Repeat step#2 until there are (V-1) edges in the spanning tree.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Adjacency matrix.</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">graph</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> vexs[MAX];       <span class="comment">// vertex</span></span><br><span class="line">    <span class="keyword">int</span> vexnum;           <span class="comment">// number of vertices</span></span><br><span class="line">    <span class="keyword">int</span> edgnum;           <span class="comment">// edges</span></span><br><span class="line">    <span class="keyword">int</span> matrix[MAX][MAX]; <span class="comment">// adjacency matrix</span></span><br><span class="line">&#125;Graph, *PGraph;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Edge struct.</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">EdgeData</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> start; <span class="comment">// start of edge</span></span><br><span class="line">    <span class="keyword">char</span> end;   <span class="comment">// end of edge</span></span><br><span class="line">    <span class="keyword">int</span> weight; <span class="comment">// weight of edge</span></span><br><span class="line">&#125;EData;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">kruskal</span><span class="params">(Graph G)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,m,n,p1,p2;</span><br><span class="line">    <span class="keyword">int</span> length;</span><br><span class="line">    <span class="keyword">int</span> index = <span class="number">0</span>;          <span class="comment">// index of rets</span></span><br><span class="line">    <span class="keyword">int</span> vends[MAX]=&#123;<span class="number">0</span>&#125;;     <span class="comment">// stores the ends of each vertex of MST</span></span><br><span class="line">    EData rets[MAX];        <span class="comment">// result array, stores edges</span></span><br><span class="line">    EData *edges;           <span class="comment">// all edges</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Get all the edges of graph.</span></span><br><span class="line">    edges = get_edges(G);</span><br><span class="line">    <span class="comment">// Sort in descending order of weight.</span></span><br><span class="line">    sorted_edges(edges, G.edgnum);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; G.edgnum; i++) &#123;</span><br><span class="line">        p1 = get_position(G, edges[i].start);   <span class="comment">// Get the number of start node of ith edge</span></span><br><span class="line">        p2 = get_position(G, edges[i].end);     <span class="comment">// Get the number of end node of ith edge</span></span><br><span class="line">        m = get_end(vends, p1);                 <span class="comment">// get end of p1</span></span><br><span class="line">        n = get_end(vends, p2);                 <span class="comment">// get end of p2</span></span><br><span class="line">        <span class="comment">// if m != n，means there is no cycle.</span></span><br><span class="line">        <span class="keyword">if</span> (m != n) &#123;</span><br><span class="line">            vends[m] = n;                       <span class="comment">// set [end of m] = n</span></span><br><span class="line">            rets[index++] = edges[i];           <span class="comment">// store result</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">free</span>(edges);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Count and print.</span></span><br><span class="line">    length = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; index; i++)</span><br><span class="line">        length += rets[i].weight;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Kruskal=%d: "</span>, length);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; index; i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"(%c, %c) "</span>, rets[i].start, rets[i].end);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ul>
 <li><a href="https://zhuanlan.zhihu.com/p/25498681" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/25498681</a></li>
 <li><a href="http://www.cnblogs.com/skywang12345/p/3603935.html" target="_blank" rel="noopener">http://www.cnblogs.com/skywang12345/p/3603935.html</a></li>
 <li><a href="https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/" target="_blank" rel="noopener">https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/</a></li>

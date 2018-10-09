@@ -106,7 +106,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/pictures/ER.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/pictures/WS.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/pictures/BA.png">
-<meta property="og:updated_time" content="2018-09-15T09:08:59.000Z">
+<meta property="og:updated_time" content="2018-10-07T12:32:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Network Generate Model and Algorithm">
 <meta name="twitter:description" content="Introduce some network models and their generating algorithms.">
@@ -333,34 +333,8 @@
 <li>Do # step 2 until all vertices are choosed.</li>
 </ol>
 <p>An efficient way to implement:</p>
-<pre><code>def generateERGraph(graph_size, probability):
-  &quot;&quot;&quot;Generate a random Erdős-Rényi undirected graph.
-
-  Args:
-    graph_size: Number of nodes in the graph.
-
-  Returns:
-    graph: Adjacency matrix of the graph.
-  &quot;&quot;&quot;
-
-  # Initialize graph(represented by adjacency matrix).
-  n = graph_size
-  graph = np.zeros([n, n])
-  w = -1
-  lp = math.log(1.0 - probability)
-
-  # Nodes in graph are from 0, n-1 (start with v as the second node index).
-  v = 1
-  while v &lt; n:
-    lr = math.log(1.0 - random.random())
-    w = w + 1 + int(lr / lp)
-    while w &gt;= v and v &lt; n:
-      w = w - v
-      v = v + 1
-    if v &lt; n:
-      graph[v, w] = graph[w, v] = 1
-  return graph
-</code></pre><h3 id="WS-Small-World-Model"><a href="#WS-Small-World-Model" class="headerlink" title="WS Small World Model"></a>WS Small World Model</h3><p>The <a href="https://en.wikipedia.org/wiki/Watts%E2%80%93Strogatz_model" target="_blank" rel="noopener">Watts–Strogatz model</a> is a random graph generation model that produces graphs with small-world properties, including short average path lengths and high clustering.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generateERGraph</span><span class="params">(graph_size, probability)</span>:</span></span><br><span class="line">  <span class="string">"""Generate a random Erdős-Rényi undirected graph.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Args:</span></span><br><span class="line"><span class="string">    graph_size: Number of nodes in the graph.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Returns:</span></span><br><span class="line"><span class="string">    graph: Adjacency matrix of the graph.</span></span><br><span class="line"><span class="string">  """</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Initialize graph(represented by adjacency matrix).</span></span><br><span class="line">  n = graph_size</span><br><span class="line">  graph = np.zeros([n, n])</span><br><span class="line">  w = <span class="number">-1</span></span><br><span class="line">  lp = math.log(<span class="number">1.0</span> - probability)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Nodes in graph are from 0, n-1 (start with v as the second node index).</span></span><br><span class="line">  v = <span class="number">1</span></span><br><span class="line">  <span class="keyword">while</span> v &lt; n:</span><br><span class="line">    lr = math.log(<span class="number">1.0</span> - random.random())</span><br><span class="line">    w = w + <span class="number">1</span> + int(lr / lp)</span><br><span class="line">    <span class="keyword">while</span> w &gt;= v <span class="keyword">and</span> v &lt; n:</span><br><span class="line">      w = w - v</span><br><span class="line">      v = v + <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> v &lt; n:</span><br><span class="line">      graph[v, w] = graph[w, v] = <span class="number">1</span></span><br><span class="line">  <span class="keyword">return</span> graph</span><br></pre></td></tr></table></figure>
+<h3 id="WS-Small-World-Model"><a href="#WS-Small-World-Model" class="headerlink" title="WS Small World Model"></a>WS Small World Model</h3><p>The <a href="https://en.wikipedia.org/wiki/Watts%E2%80%93Strogatz_model" target="_blank" rel="noopener">Watts–Strogatz model</a> is a random graph generation model that produces graphs with small-world properties, including short average path lengths and high clustering.</p>
 <p><img src="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/pictures/WS.png" width="80%" height="80%"></p>
 <p><strong>Algorithm</strong></p>
 <ol>
@@ -368,64 +342,8 @@
 <li>Connect each node to its right k/2 neighbors.</li>
 <li>For each edge u-v in ring, with p, randomly selecting existing node w and add new edge u-w.</li>
 </ol>
-<pre><code>def generateSmallWorldGraph(graph_size, num_neighbors):
-  &quot;&quot;&quot;Generate a Watts–Strogatz small world graph.
-
-  Args:
-    graph_size: Number of nodes in the graph.
-    num_neighbors: Number of edges with neighbors.
-
-  Return:
-    graph: Adjacency matrix of the graph.
-  &quot;&quot;&quot;
-
-  # Initialize graph(represented by adjacency matrix).
-  n = graph_size
-  k = num_neighbors
-  graph = np.zeros([n, n])
-
-  nodes = range(n) # List of 0~n-1
-  fromv = nodes
-
-  # Connect each node to its right k/2 neighbors.
-  for i in range(1, k//2+1):
-    tov = fromv[i:] + fromv[:i]
-    for j in range(n):
-      graph[fromv[j], tov[j]] = graph[tov[j], fromv[j]] = 1
-
-  # For each edge u-v in ring, with PROBABILITY, randomly selecting
-  # existing node w and add new edge u-w.
-  for u in range(n):
-    degree_u = calculateDegree(graph, u)
-    for v in range(n):
-      if graph[u][v] &gt; 0 and PROBABILITY &gt; np.random.rand():
-        w = np.random.randint(n)
-        while u == w or graph[u][w] &gt; 0:
-          w = np.random.randint(n)
-          if degree_u &gt;= n-1:
-            break
-        else:
-          graph[u][w] = graph[w][u] = 1
-
-  return graph
-
-def calculateDegree(graph, vertex):
-  &quot;&quot;&quot;Calculate degree of the node in the graph.
-
-  Args:
-    graph: Adjacency matrix.
-    vertex: Node ID.
-
-  Returns:
-    degree: Degree of the node.
-  &quot;&quot;&quot;
-  n = len(graph)
-  degree = 0
-  for j in range(n):
-    if graph[vertex][j] &gt; 0:
-      degree += 1
-  return degree
-</code></pre><h3 id="BA-Model"><a href="#BA-Model" class="headerlink" title="BA Model"></a>BA Model</h3><p>The <a href="https://en.wikipedia.org/wiki/Barab%C3%A1si%E2%80%93Albert_model" target="_blank" rel="noopener">Barabási–Albert (BA) model</a> is an algorithm for generating random scale-free networks using a preferential attachment mechanism.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generateSmallWorldGraph</span><span class="params">(graph_size, num_neighbors)</span>:</span></span><br><span class="line">  <span class="string">"""Generate a Watts–Strogatz small world graph.</span></span><br><span class="line"><span class="string">	</span></span><br><span class="line"><span class="string">  Args:</span></span><br><span class="line"><span class="string">    graph_size: Number of nodes in the graph.</span></span><br><span class="line"><span class="string">    num_neighbors: Number of edges with neighbors.</span></span><br><span class="line"><span class="string">	</span></span><br><span class="line"><span class="string">  Return:</span></span><br><span class="line"><span class="string">    graph: Adjacency matrix of the graph.</span></span><br><span class="line"><span class="string">  """</span></span><br><span class="line">	</span><br><span class="line">  <span class="comment"># Initialize graph(represented by adjacency matrix).</span></span><br><span class="line">  n = graph_size</span><br><span class="line">  k = num_neighbors</span><br><span class="line">  graph = np.zeros([n, n])</span><br><span class="line">	</span><br><span class="line">  nodes = range(n) <span class="comment"># List of 0~n-1</span></span><br><span class="line">  fromv = nodes</span><br><span class="line">	</span><br><span class="line">  <span class="comment"># Connect each node to its right k/2 neighbors.</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, k//<span class="number">2</span>+<span class="number">1</span>):</span><br><span class="line">    tov = fromv[i:] + fromv[:i]</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">      graph[fromv[j], tov[j]] = graph[tov[j], fromv[j]] = <span class="number">1</span></span><br><span class="line">	</span><br><span class="line">  <span class="comment"># For each edge u-v in ring, with PROBABILITY, randomly selecting</span></span><br><span class="line">  <span class="comment"># existing node w and add new edge u-w.</span></span><br><span class="line">  <span class="keyword">for</span> u <span class="keyword">in</span> range(n):</span><br><span class="line">    degree_u = calculateDegree(graph, u)</span><br><span class="line">    <span class="keyword">for</span> v <span class="keyword">in</span> range(n):</span><br><span class="line">      <span class="keyword">if</span> graph[u][v] &gt; <span class="number">0</span> <span class="keyword">and</span> PROBABILITY &gt; np.random.rand():</span><br><span class="line">        w = np.random.randint(n)</span><br><span class="line">        <span class="keyword">while</span> u == w <span class="keyword">or</span> graph[u][w] &gt; <span class="number">0</span>:</span><br><span class="line">          w = np.random.randint(n)</span><br><span class="line">          <span class="keyword">if</span> degree_u &gt;= n<span class="number">-1</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">          graph[u][w] = graph[w][u] = <span class="number">1</span></span><br><span class="line">	</span><br><span class="line">  <span class="keyword">return</span> graph</span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calculateDegree</span><span class="params">(graph, vertex)</span>:</span></span><br><span class="line">  <span class="string">"""Calculate degree of the node in the graph.</span></span><br><span class="line"><span class="string">	</span></span><br><span class="line"><span class="string">  Args:</span></span><br><span class="line"><span class="string">    graph: Adjacency matrix.</span></span><br><span class="line"><span class="string">    vertex: Node ID.</span></span><br><span class="line"><span class="string">	</span></span><br><span class="line"><span class="string">  Returns:</span></span><br><span class="line"><span class="string">    degree: Degree of the node.</span></span><br><span class="line"><span class="string">  """</span></span><br><span class="line">  n = len(graph)</span><br><span class="line">  degree = <span class="number">0</span></span><br><span class="line">  <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">    <span class="keyword">if</span> graph[vertex][j] &gt; <span class="number">0</span>:</span><br><span class="line">      degree += <span class="number">1</span></span><br><span class="line">  <span class="keyword">return</span> degree</span><br></pre></td></tr></table></figure>
+<h3 id="BA-Model"><a href="#BA-Model" class="headerlink" title="BA Model"></a>BA Model</h3><p>The <a href="https://en.wikipedia.org/wiki/Barab%C3%A1si%E2%80%93Albert_model" target="_blank" rel="noopener">Barabási–Albert (BA) model</a> is an algorithm for generating random scale-free networks using a preferential attachment mechanism.</p>
 <p><img src="https://raw.githubusercontent.com/Yonezcy/Yonezcy.github.io/master/pictures/BA.png" width="80%" height="80%"></p>
 <p><strong>Algorithm</strong></p>
 <ol>
@@ -434,44 +352,7 @@ def calculateDegree(graph, vertex):
 <li>Add [v]*m and all vertices from target to repeated list.</li>
 <li>Update target list by randomly choosing m vertices from repeated list and then choose a new vertex v to go # step 2.</li>
 </ol>
-<pre><code>def generateBAGraph(graph_size, num_new_edges):
-  &quot;&quot;&quot;Generate a Barabási–Albert preferential attachment model graph.
-
-  Args:
-    graph_size: Number of nodes in the graph.
-    num_new_edges:  Number of edges to attach from a new node to existing nodes.
-
-  Returns:
-    graph: Adjacency matrix of the graph.
-  &quot;&quot;&quot;
-
-  # Initialize graph(represented by adjacency matrix).
-  n = graph_size
-  m = num_new_edges
-  graph = np.zeros([n, n])
-
-  targets = range(m) # Target nodes for new edges
-  repeated_nodes = [] # List of existing nodes
-
-  # Start adding edge from m.
-  source = m
-  while source &lt; n:
-    # Link target nodes and source.
-    for i in range(m):
-      graph[source, targets[i]] = graph[targets[i], source] = 1
-
-    # Add target to repeated list(each node has been linked once).
-    repeated_nodes.extend(targets)
-
-    # Add source to repeated list(each node has been linked once).
-    repeated_nodes.extend([source] * m)
-
-    # Randomly get m nodes from repeated list to form new target.
-    targets = random.sample(repeated_nodes, m)
-    source += 1
-
-  return graph
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generateBAGraph</span><span class="params">(graph_size, num_new_edges)</span>:</span></span><br><span class="line">  <span class="string">"""Generate a Barabási–Albert preferential attachment model graph.</span></span><br><span class="line"><span class="string">	</span></span><br><span class="line"><span class="string">  Args:</span></span><br><span class="line"><span class="string">    graph_size: Number of nodes in the graph.</span></span><br><span class="line"><span class="string">    num_new_edges:  Number of edges to attach from a new node to existing nodes.</span></span><br><span class="line"><span class="string">	</span></span><br><span class="line"><span class="string">  Returns:</span></span><br><span class="line"><span class="string">    graph: Adjacency matrix of the graph.</span></span><br><span class="line"><span class="string">  """</span></span><br><span class="line">	</span><br><span class="line">  <span class="comment"># Initialize graph(represented by adjacency matrix).</span></span><br><span class="line">  n = graph_size</span><br><span class="line">  m = num_new_edges</span><br><span class="line">  graph = np.zeros([n, n])</span><br><span class="line">	</span><br><span class="line">  targets = range(m) <span class="comment"># Target nodes for new edges</span></span><br><span class="line">  repeated_nodes = [] <span class="comment"># List of existing nodes</span></span><br><span class="line">	</span><br><span class="line">  <span class="comment"># Start adding edge from m.</span></span><br><span class="line">  source = m</span><br><span class="line">  <span class="keyword">while</span> source &lt; n:</span><br><span class="line">    <span class="comment"># Link target nodes and source.</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(m):</span><br><span class="line">      graph[source, targets[i]] = graph[targets[i], source] = <span class="number">1</span></span><br><span class="line">	</span><br><span class="line">    <span class="comment"># Add target to repeated list(each node has been linked once).</span></span><br><span class="line">    repeated_nodes.extend(targets)</span><br><span class="line">	</span><br><span class="line">    <span class="comment"># Add source to repeated list(each node has been linked once).</span></span><br><span class="line">    repeated_nodes.extend([source] * m)</span><br><span class="line">	</span><br><span class="line">    <span class="comment"># Randomly get m nodes from repeated list to form new target.</span></span><br><span class="line">    targets = random.sample(repeated_nodes, m)</span><br><span class="line">    source += <span class="number">1</span></span><br><span class="line">	</span><br><span class="line">  <span class="keyword">return</span> graph</span><br></pre></td></tr></table></figure>
       
     </div>
     
